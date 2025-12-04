@@ -38,6 +38,18 @@ const About = () => {
                 alt="Ansh Kumar" 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
               />
+
+              <div className="absolute bottom-4 left-4 px-4 py-1.5 
+                    bg-white/10 backdrop-blur-md 
+                    border border-white/20 
+                    rounded-full text-sm font-mono 
+                    text-white tracking-wide
+                    shadow-lg shadow-cyan-500/20
+                    flex items-center gap-1">
+                    <span>📍</span>
+                    <span>Microsoft Noida</span>
+              </div>
+
             </div>
           </div>
 
