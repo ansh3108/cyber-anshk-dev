@@ -14,7 +14,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="text-primary hover:text-primary/80 transition-colors glow-cyan-text"
           >
-            ansh3108/anshk-dev
+            ansh3108/cyber-anshk-dev
           </a>
         </p>
       </div>
