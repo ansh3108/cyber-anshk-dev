@@ -1,12 +1,12 @@
 const Footer = () => {
   return (
-    <footer className="py-8 px-4 border-t border-border">
+    <div className="py-12 px-4 mt-16">
       <div className="max-w-6xl mx-auto text-center space-y-2">
-        <p className="font-mono text-sm text-muted-foreground">
+        <p className="font-mono text-base text-muted-foreground">
           <span className="text-primary glow-cyan-text">&gt;</span> Made with{' '}
-          <span className="text-secondary glow-magenta-text">♥</span> + JavaScript
+          <span className="text-secondary glow-magenta-text">♥</span> + TypeScript
         </p>
-        <p className="font-mono text-sm text-muted-foreground">
+        <p className="font-mono text-base text-muted-foreground">
           Open source at{' '}
           <a
             href="http://github.com/ansh3108/cyber-anshk-dev/"
@@ -18,7 +18,7 @@ const Footer = () => {
           </a>
         </p>
       </div>
-    </footer>
+    </div>
   );
 };
 
