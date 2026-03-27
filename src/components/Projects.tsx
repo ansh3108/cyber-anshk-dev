@@ -14,6 +14,7 @@ const projects = [
     description: 'A USB powered module that can provide four 5V output ports from a single USB input',
     tech: ['Hardware', 'Circuits', 'Routing'],
     liveUrl: 'https://oshwlab.com/itz.anshkumar/usb-hub',
+    // githubUrl: 'https://github.com/ansh3108/parallax',   TODO: remove gh button
   },
   
 ];
