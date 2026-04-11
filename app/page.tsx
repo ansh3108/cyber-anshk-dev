@@ -3,6 +3,7 @@ import { Section } from "@/components/Section";
 import { Projects } from "@/components/Projects";
 import { Stack } from "@/components/Stack";
 import { Cursor } from "@/components/Cursor";
+import { SolanaStats } from "@/components/SolanaStats";
 
 export default function Home() {
   return (
@@ -26,14 +27,18 @@ export default function Home() {
               <span className="text-purple">ansh</span>k.dev
             </h1>
             <p className="text-[11px] text-[#8888aa]">
-              &gt; shipping on-chain from Delhi. <span className="text-solana">[rust + solana]</span>.
+              &gt; shipping on-chain from Delhi. <span className="text-solana">[rust + solana]</span>. always building.
             </p>
+          </Section>
+
+          <Section command="solana --status">
+            <SolanaStats />
           </Section>
 
           <Section command="cat now.txt">
             <div className="text-[11px] text-[#3a3a52] mb-1"># what i&apos;m working on this week</div>
             <p className="text-[11px] text-[#c8c8d4] max-w-xl">
-              Brushing my basics on javascript after board exams!
+              Building a decentralized vault architecture using Anchor. Optimizing PDA seed derivation for gas efficiency.
             </p>
             <div className="text-solana text-[11px] mt-2">[ last updated: Apr 2026 ]</div>
           </Section>
@@ -64,7 +69,7 @@ export default function Home() {
             <div className="space-y-1">
               {[
                 { label: "github", url: "github.com/ansh3108" },
-                { label: "linkedin", url: "linkedin.com/in/anshk" },
+                { label: "linkedin", url: "linkedin.com/in/ansh-kumar-tech/" },
                 { label: "email", url: "hey@anshk.dev" }
               ].map((link) => (
                 <div key={link.label} className="flex text-[11px]">
