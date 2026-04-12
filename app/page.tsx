@@ -8,6 +8,7 @@ import {
   ExternalLink, GitBranch, Users, MapPin, 
   Code2, Rocket, Globe, ZoomIn, ZoomOut 
 } from "lucide-react";
+import { SocialLinks } from "@/components/SocialLinks";
 import { BeamsBackground } from "@/components/ui/beams-background";
 
 export default function Home() {
@@ -72,13 +73,20 @@ export default function Home() {
     const el = document.createElement('div');
     el.innerHTML = `
       <div style="position:relative;width:0;height:0">
-        <div style="position:absolute;width:40px;height:40px;border-radius:50%;background:rgba(147,51,234,0.3);transform:translate(-50%,-50%);animation:pulse-ring 2.5s infinite"></div>
-        <div style="position:absolute;width:12px;height:12px;border-radius:50%;background:#9333ea;border:2px solid #ffffff;transform:translate(-50%,-50%);box-shadow:0 0 25px 8px rgba(147,51,234,1);filter:drop-shadow(0 0 12px #9333ea)"></div>
+        <div style="position:absolute;width:72px;height:72px;border-radius:50%;background:radial-gradient(circle, rgba(147,51,234,0.24) 0%, rgba(147,51,234,0.1) 34%, rgba(147,51,234,0) 72%);transform:translate(-50%,-50%);animation:pulse-ring 2.2s cubic-bezier(0.4,0,0.2,1) infinite"></div>
+        <div style="position:absolute;width:48px;height:48px;border-radius:50%;background:radial-gradient(circle, rgba(167,139,250,0.22) 0%, rgba(147,51,234,0.16) 42%, rgba(147,51,234,0) 74%);transform:translate(-50%,-50%);animation:pulse-core 1.8s ease-in-out infinite"></div>
+        <div style="position:absolute;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 35%, #ffffff 0%, #f5d0fe 14%, #c084fc 34%, #9333ea 62%, #6d28d9 100%);border:2px solid rgba(255,255,255,0.98);transform:translate(-50%,-50%);box-shadow:0 0 16px 5px rgba(147,51,234,0.95), 0 0 38px 14px rgba(147,51,234,0.5), 0 0 70px 20px rgba(147,51,234,0.18);filter:drop-shadow(0 0 20px #9333ea)"></div>
       </div>
       <style>
         @keyframes pulse-ring {
-          0% { transform: translate(-50%,-50%) scale(0.5); opacity: 0.8; }
-          100% { transform: translate(-50%,-50%) scale(3); opacity: 0; }
+          0% { transform: translate(-50%,-50%) scale(0.42); opacity: 0.0; }
+          18% { opacity: 0.7; }
+          55% { opacity: 0.32; }
+          100% { transform: translate(-50%,-50%) scale(3.2); opacity: 0; }
+        }
+        @keyframes pulse-core {
+          0%, 100% { transform: translate(-50%,-50%) scale(0.92); opacity: 0.78; }
+          50% { transform: translate(-50%,-50%) scale(1.08); opacity: 1; }
         }
       </style>
     `;
@@ -102,6 +110,14 @@ export default function Home() {
     Java: "#b07219",
     "Next.js": "#ffffff"
   };
+
+  const games = [
+    { n: "Last of Us", s: "playstation", color: "003791" },
+    { n: "GTA V", s: "rockstargames", color: "ffffff" },
+    { n: "Minecraft", icon: <MinecraftLogo />, accent: "rgba(125,207,106,0.15)" },
+    { n: "Forza Horizon 5", icon: <ForzaHorizonLogo />, accent: "rgba(249,115,22,0.16)" },
+    { n: "God of War", s: "playstation", color: "003791" }
+  ];
 
   return (
     <div className="relative min-h-screen font-mono text-[#e6edf3] selection:bg-[#9333ea]/30">
@@ -213,7 +229,7 @@ export default function Home() {
         </section>
 
         <section id="projects" className="py-24 space-y-12">
-          <h2 className="text-4xl font-black tracking-tighter text-white uppercase italic">Projects</h2>
+          <h2 className="text-4xl font-black tracking-tighter text-white uppercase italic">Recent Repositories</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {repos.map(r => (
               <a key={r.id} href={r.html_url} target="_blank" className="group block bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-3xl hover:border-[#9333ea]/40 transition-all relative overflow-hidden">
@@ -240,20 +256,24 @@ export default function Home() {
             <Gamepad2 className="text-[#9333ea]" size={28} />
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {[
-              { n: "Last of Us", s: "playstation" },
-              { n: "GTA V", s: "rockstargames" },
-              { n: "Minecraft", s: "minecraft" },
-              { n: "Forza 5", s: "xbox" },
-              { n: "God of War", s: "playstation" }
-            ].map(g => (
-              <div key={g.n} className="group relative aspect-square bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center p-4 transition-all hover:bg-white/10 hover:border-[#9333ea]/40">
-                <img 
-                  src={`https://cdn.simpleicons.org/${g.s}/ffffff`} 
-                  className="w-7 h-7 opacity-30 group-hover:opacity-100 transition-all group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" 
-                  alt={g.n} 
+            {games.map(g => (
+              <div key={g.n} className="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 transition-all hover:-translate-y-0.5 hover:bg-white/10 hover:border-[#9333ea]/40">
+                <div
+                  className="absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100"
+                  style={{ background: `radial-gradient(circle at center, ${g.accent ?? "rgba(147,51,234,0.15)"} 0%, transparent 70%)` }}
                 />
-                <span className="absolute bottom-2 text-[7px] font-black uppercase text-white/0 group-hover:text-white/40 transition-all tracking-widest">{g.n}</span>
+                <div className="relative z-10 flex h-full items-center justify-center">
+                  {g.icon ?? (
+                    <img 
+                      src={`https://cdn.simpleicons.org/${g.s}/${g.color ?? "ffffff"}`} 
+                      className="w-7 h-7 opacity-70 transition-all group-hover:opacity-100 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" 
+                      alt={g.n} 
+                    />
+                  )}
+                </div>
+                <div className="absolute inset-x-0 bottom-0 border-t border-white/10 bg-black/35 px-2 py-2 text-center backdrop-blur-sm">
+                  <span className="block text-[9px] font-black uppercase tracking-widest text-white/75">{g.n}</span>
+                </div>
               </div>
             ))}
           </div>
@@ -263,7 +283,7 @@ export default function Home() {
           <h2 className="text-7xl md:text-9xl font-black italic tracking-tighter text-white uppercase underline decoration-[#9333ea] decoration-4 underline-offset-8">Contact</h2>
           <div className="flex flex-col items-center gap-8">
             <a href="mailto:hey@anshk.dev" className="group relative flex items-center gap-4 bg-white text-black px-12 py-6 rounded-full font-black text-xl hover:scale-[1.03] transition-all shadow-[0_0_30px_rgba(147,51,234,0.1)]">
-              <Mail size={24} /> open_transmission
+              <Mail size={24} /> shoot me an email!
               <div className="absolute inset-0 bg-[#9333ea] rounded-full -z-10 blur-2xl opacity-0 group-hover:opacity-50 transition-opacity" />
             </a>
             <SocialLinks />
@@ -273,11 +293,11 @@ export default function Home() {
         <footer className="py-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold text-[#484f58] uppercase tracking-[0.4em]">
           <div className="flex items-center gap-3">
             <div className="w-1.5 h-1.5 rounded-full bg-[#9333ea] animate-ping" />
-            Session: {Math.floor(uptime / 60)}:{uptime % 60 < 10 ? `0${uptime % 60}` : uptime % 60}
+            You're here for: {Math.floor(uptime / 60)}:{uptime % 60 < 10 ? `0${uptime % 60}` : uptime % 60}
           </div>
           <div className="flex items-center gap-8">
-            <span>© 2026 Ansh Rahman</span>
-            <span className="text-[#9333ea]">Status_Optimal</span>
+            <span></span>
+            <span className="text-[#9333ea]"></span>
           </div>
         </footer>
       </div>
@@ -301,25 +321,33 @@ function Stat({ icon, label, val }: any) {
   );
 }
 
-function SocialLinks() {
-  const links = [
-    { n: "github", h: "https://github.com/ansh3108" },
-    { n: "linkedin", h: "https://linkedin.com/in/ansh" },
-    { n: "x", h: "https://x.com/ansh" },
-    { n: "discord", h: "#" }
-  ];
-
+function MinecraftLogo() {
   return (
-    <div className="flex gap-5">
-      {links.map((l) => (
-        <a key={l.n} href={l.h} target="_blank" className="p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full hover:border-[#9333ea]/50 hover:bg-[#9333ea]/10 transition-all group">
-          <img 
-            src={`https://cdn.simpleicons.org/${l.n}/ffffff`} 
-            alt={l.n} 
-            className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" 
-          />
-        </a>
-      ))}
-    </div>
+    <svg viewBox="0 0 64 64" aria-hidden="true" className="h-9 w-9 drop-shadow-[0_0_12px_rgba(125,207,106,0.35)]">
+      <path d="M20 17h24l8 8v22l-8 8H20l-8-8V25l8-8Z" fill="#8b5a2b" />
+      <path d="M20 17h24l8 8H12l8-8Z" fill="#7dcf6a" />
+      <path d="M18 25h28v18H18z" fill="#67b35b" />
+      <path d="M24 31h6v6h-6zm10 0h6v6h-6z" fill="#1b1b1b" opacity="0.9" />
+      <path d="M26 37h12v3H26z" fill="#1b1b1b" opacity="0.55" />
+    </svg>
+  );
+}
+
+function ForzaHorizonLogo() {
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden="true" className="h-9 w-9 drop-shadow-[0_0_12px_rgba(249,115,22,0.4)]">
+      <defs>
+        <linearGradient id="forza-horizon-badge" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f59e0b" />
+          <stop offset="55%" stopColor="#ef4444" />
+          <stop offset="100%" stopColor="#a855f7" />
+        </linearGradient>
+      </defs>
+      <rect x="10" y="14" width="44" height="36" rx="12" fill="rgba(255,255,255,0.06)" stroke="url(#forza-horizon-badge)" strokeWidth="2" />
+      <path d="M16 23h18l-6 6H16z" fill="url(#forza-horizon-badge)" opacity="0.95" />
+      <path d="M16 33h32l-6 6H16z" fill="#f5f5f5" opacity="0.95" />
+      <path d="M39 20l9 9" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.7" />
+      <path d="M22 42h20" stroke="url(#forza-horizon-badge)" strokeWidth="3" strokeLinecap="round" />
+    </svg>
   );
 }

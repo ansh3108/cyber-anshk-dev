@@ -13,6 +13,11 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "ansh@devbox:~",
   description: "personal portfolio",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
