@@ -144,7 +144,7 @@ export default function Home() {
             <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-white/10 p-2 relative group">
               <div className="w-full h-full rounded-full overflow-hidden border-4 border-[#9333ea]/20 bg-[#0d1117]">
                 <img 
-                  src="https://github.com/ansh3108.png" 
+                  src="ansh.jpeg" 
                   alt="Ansh" 
                   className="w-full h-full object-cover grayscale-[10%]"
                 />
