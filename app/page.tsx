@@ -1,17 +1,20 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { motion, useScroll, useTransform, useInView } from "motion/react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import {
   GitBranch, Users, Star, Globe, MapPin,
-  Code2, Rocket, ExternalLink, Mail,
-  ArrowDown, ZoomIn, ZoomOut, Sparkles,
+  Code2, ExternalLink, Mail,
+  ArrowDown, ZoomIn, ZoomOut, ArrowUpRight,
 } from "lucide-react";
-
 import { Navbar } from "@/components/Navbar";
 import { SocialLinks } from "@/components/SocialLinks";
+import { CustomCursor } from "@/components/CustomCursor";
+import { TextReveal } from "@/components/TextReveal";
+import { Marquee } from "@/components/Marquee";
+import { GitHubCalendar } from "react-github-calendar";
 
 /* ─── Data ──────────────────────────────────────────── */
 
@@ -19,34 +22,38 @@ const projects = [
   {
     name: "USB Hub",
     description:
-      "A hardware module providing four 5V output ports from a single USB input. Designed with custom circuit routing and fabricated PCB.",
+      "A hardware module providing four 5V output ports from a single USB input. Custom circuit routing and fabricated PCB.",
     link: "https://oshwlab.com/itz.anshkumar/usb-hub",
     language: "Hardware / PCB",
     accent: "#22c55e",
+    number: "01",
   },
   {
     name: "Parallax",
     description:
-      "2D projectile physics simulation built with HTML5 Canvas. Includes math for gravity, velocity, and collision detection.",
+      "2D projectile physics simulation built with HTML5 Canvas. Math for gravity, velocity, and collision detection.",
     link: "https://github.com/ansh3108/Parallax",
     language: "Javascript / Canvas",
     accent: "#eab308",
+    number: "02",
   },
   {
     name: "Commit-to-Quest",
     description:
-      "Turns your GitHub activity into an 8-bit RPG adventure! Level up your character with every commit.",
+      "Turns your GitHub activity into an 8-bit RPG adventure. Level up with every commit.",
     link: "https://github.com/ansh3108/Commit-to-Quest",
     language: "TypeScript",
     accent: "#3b82f6",
+    number: "03",
   },
   {
     name: "Terminal Quest",
     description:
-      "Rust-based terminal productivity tool. Uses a custom TUI to track focused sessions while interfacing with local project environments.",
+      "Rust-based terminal productivity tool. Custom TUI to track focused sessions while interfacing with local project environments.",
     link: "https://github.com/ansh3108/Terminal-Quest",
     language: "Rust / Anchor",
     accent: "#ce412b",
+    number: "04",
     wip: true,
   },
 ];
@@ -62,56 +69,119 @@ const skills = [
   { name: "Microcontrollers", color: "#94a3b8" },
 ];
 
-const tags = [
-  { emoji: "🎓", text: "Student", color: "#9333ea" },
-  { emoji: "⭐", text: "Hack Club", color: "#ec3750" },
-  { emoji: "🔓", text: "Open Source", color: "#14F195" },
-  { emoji: "⚙️", text: "Hardware", color: "#f59e0b" },
-  { emoji: "🌐", text: "Web3", color: "#3b82f6" },
-];
+/* ─── Animated Section Wrapper ──────────────────────── */
 
-/* ─── Reusable Components ───────────────────────────── */
-
-function AnimatedSection({
+function FadeIn({
   children,
   className = "",
-  id,
   delay = 0,
 }: {
   children: React.ReactNode;
   className?: string;
-  id?: string;
   delay?: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* ─── Project Card ──────────────────────────────────── */
+
+function ProjectCard({
+  project,
+  index,
+}: {
+  project: (typeof projects)[0];
+  index: number;
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <motion.section
+    <motion.a
       ref={ref}
-      id={id}
-      className={className}
-      initial={{ opacity: 0, y: 40 }}
+      href={project.link}
+      target="_blank"
+      rel="noreferrer"
+      className="group block relative"
+      initial={{ opacity: 0, y: 60 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
+      transition={{
+        duration: 0.8,
+        delay: index * 0.12,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
-      {children}
-    </motion.section>
+      <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 md:p-10 transition-all duration-500 group-hover:border-white/[0.12] group-hover:bg-white/[0.04]">
+        {/* Number */}
+        <span className="absolute top-6 right-8 text-[80px] md:text-[120px] font-black text-white/[0.02] leading-none select-none group-hover:text-white/[0.04] transition-colors duration-500">
+          {project.number}
+        </span>
+
+        <div className="relative z-10 space-y-5">
+          {/* Header */}
+          <div className="flex items-start justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center gap-3">
+                <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-[#9333ea] transition-colors duration-300">
+                  {project.name}
+                </h3>
+                {project.wip && (
+                  <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                    WIP
+                  </span>
+                )}
+              </div>
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-2 h-2 rounded-full shrink-0"
+                  style={{ backgroundColor: project.accent }}
+                />
+                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/25">
+                  {project.language}
+                </span>
+              </div>
+            </div>
+
+            <div
+              data-cursor="pointer"
+              className="flex items-center justify-center w-10 h-10 rounded-full border border-white/[0.06] bg-white/[0.02] group-hover:border-[#9333ea]/30 group-hover:bg-[#9333ea]/10 transition-all duration-300"
+            >
+              <ArrowUpRight
+                size={16}
+                className="text-white/30 group-hover:text-[#9333ea] transition-colors duration-300"
+              />
+            </div>
+          </div>
+
+          {/* Description */}
+          <p className="text-sm md:text-base text-white/30 leading-relaxed max-w-xl group-hover:text-white/45 transition-colors duration-300">
+            {project.description}
+          </p>
+        </div>
+
+        {/* Hover gradient */}
+        <div
+          className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full blur-[100px] opacity-0 group-hover:opacity-[0.06] transition-opacity duration-700"
+          style={{ backgroundColor: project.accent }}
+        />
+      </div>
+    </motion.a>
   );
 }
 
-function SectionLabel({ icon, text }: { icon: React.ReactNode; text: string }) {
-  return (
-    <div className="flex items-center gap-2.5 mb-8">
-      <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#9333ea]/10 text-[#9333ea]">
-        {icon}
-      </div>
-      <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">
-        {text}
-      </span>
-    </div>
-  );
-}
+/* ─── Stat Card ─────────────────────────────────────── */
 
 function StatCard({
   icon,
@@ -124,13 +194,13 @@ function StatCard({
 }) {
   return (
     <div className="glass-card p-5 flex flex-col items-center gap-2 hover:border-white/15 transition-all group">
-      <div className="text-white/30 group-hover:text-[#9333ea] transition-colors">
+      <div className="text-white/20 group-hover:text-[#9333ea] transition-colors">
         {icon}
       </div>
       <div className="text-2xl font-black text-white tabular-nums">
         {value || "—"}
       </div>
-      <div className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em]">
+      <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.2em]">
         {label}
       </div>
     </div>
@@ -144,6 +214,15 @@ export default function Home() {
   const [zoom, setZoom] = useState(10);
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
+
+  // Hero parallax
+  const heroRef = useRef(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroY = useTransform(heroProgress, [0, 1], [0, 200]);
+  const heroOpacity = useTransform(heroProgress, [0, 0.8], [1, 0]);
 
   // Fetch GitHub profile
   useEffect(() => {
@@ -182,6 +261,7 @@ export default function Home() {
 
     return () => {
       map.current?.remove();
+      map.current = null;
     };
   }, []);
 
@@ -190,308 +270,321 @@ export default function Home() {
   }, [zoom]);
 
   return (
-    <div className="relative min-h-screen font-mono text-[#e6edf3]">
-
+    <div className="relative min-h-screen font-mono text-[#e6edf3] grain">
+      {/* Custom Cursor */}
+      <CustomCursor />
 
       {/* Navbar */}
       <Navbar />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6">
-        {/* ═══ HERO ═══ */}
-        <AnimatedSection
-          id="home"
-          className="min-h-screen flex flex-col items-center justify-center text-center pt-24 pb-16"
+      {/* ═══════════════════════════════════════════════
+          SECTION 1: HERO
+          ═══════════════════════════════════════════════ */}
+      <section id="home" ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
+        <motion.div
+          className="relative z-10 text-center px-6"
+          style={{ y: heroY, opacity: heroOpacity }}
         >
-          {/* Avatar */}
+          {/* Status */}
           <motion.div
-            className="relative mb-8"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="flex items-center justify-center gap-2 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="w-28 h-28 rounded-full p-[2px] bg-gradient-to-br from-[#9333ea] via-[#7c3aed] to-[#6d28d9]">
-              <div className="w-full h-full rounded-full overflow-hidden border-2 border-[#030303]">
-                <img
-                  src="/ansh.jpeg"
-                  alt="Ansh Kumar"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-400 rounded-full border-[3px] border-[#030303] shadow-[0_0_12px_rgba(52,211,153,0.6)]" />
           </motion.div>
 
           {/* Name */}
           <motion.h1
-            className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-[0.9] mb-6"
-            initial={{ opacity: 0, y: 30 }}
+            className="text-[clamp(3rem,12vw,10rem)] font-black tracking-[-0.04em] text-white leading-[0.85] mb-6"
+            initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            Ansh Kumar
-            <span className="text-[#9333ea]">.</span>
+            ANSH
+            <br />
+            KUMAR<span className="text-[#9333ea]">.</span>
           </motion.h1>
 
-          {/* Tagline */}
+          {/* Subtitle */}
           <motion.p
-            className="text-white/40 max-w-lg mx-auto leading-relaxed text-base md:text-lg font-medium mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="text-[13px] md:text-sm font-medium uppercase tracking-[0.35em] text-white/25 mb-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
           >
-            Building decentralized systems on{" "}
-            <span className="text-[#14F195] font-semibold">Solana</span>.
-            Shipping at{" "}
-            <span className="text-[#ec3750] font-semibold">Hack Club</span> and
-            contributing to open-source. Crafting hardware & chasing
-            the next frontier in Web3.
+            Builder · Hacker · Engineer
           </motion.p>
-
-          {/* Tags */}
-          <motion.div
-            className="flex flex-wrap justify-center gap-2.5 mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {tags.map((tag) => (
-              <div
-                key={tag.text}
-                className="flex items-center gap-2 bg-white/[0.04] border border-white/[0.06] px-4 py-2 rounded-full text-xs font-medium hover:bg-white/[0.08] hover:border-white/15 transition-all cursor-default"
-              >
-                <span>{tag.emoji}</span>
-                <span className="text-white/60">{tag.text}</span>
-                <div
-                  className="w-1.5 h-1.5 rounded-full"
-                  style={{ backgroundColor: tag.color }}
-                />
-              </div>
-            ))}
-          </motion.div>
 
           {/* Social Links */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            className="flex justify-center"
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <SocialLinks />
           </motion.div>
+        </motion.div>
 
-          {/* Scroll indicator */}
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-white/15"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
+        >
+          <span className="text-[9px] font-medium uppercase tracking-[0.4em]">
+            Scroll
+          </span>
           <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/20"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           >
-            <span className="text-[10px] font-medium uppercase tracking-[0.3em]">
-              Scroll
-            </span>
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-            >
-              <ArrowDown size={16} />
-            </motion.div>
+            <ArrowDown size={14} />
           </motion.div>
-        </AnimatedSection>
+        </motion.div>
 
-        {/* ═══ ABOUT / DASHBOARD ═══ */}
-        <AnimatedSection id="about" className="py-24 space-y-10">
-          <SectionLabel icon={<Rocket size={16} />} text="Mission Control" />
+        {/* Ambient glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#9333ea]/[0.03] blur-[150px] pointer-events-none" />
+      </section>
 
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-white leading-tight">
-            Full-stack builder at the{" "}
-            <span className="text-[#9333ea]">intersection</span>
-            <br className="hidden md:block" /> of systems & the decentralized web.
-          </h2>
+      {/* ═══════════════════════════════════════════════
+          SECTION 2: MANIFESTO (Scroll-reveal text)
+          ═══════════════════════════════════════════════ */}
+      <section id="about" className="relative py-32 md:py-48 px-6">
+        <div className="max-w-5xl mx-auto">
+          <FadeIn>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#9333ea]/60 mb-10 block">
+              About
+            </span>
+          </FadeIn>
 
-          {/* Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-4">
-            {/* Map Card */}
-            <div className="md:col-span-5 glass-card overflow-hidden group relative min-h-[340px]">
-              <div className="absolute top-0 left-0 right-0 p-4 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent">
-                <span className="text-[10px] font-bold text-white/50 uppercase tracking-[0.2em] flex items-center gap-2">
-                  <MapPin size={12} /> Location
-                </span>
-                <span className="text-[10px] text-white/30 tracking-wider uppercase">
-                  Faridabad · India
-                </span>
-              </div>
+          <TextReveal
+            text="I build decentralized systems on Solana. I ship at Hack Club and contribute to open-source. I craft hardware from circuit boards to microcontrollers, and chase the next frontier in Web3."
+            className="text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.15] tracking-tight"
+          />
+        </div>
+      </section>
 
-              <div className="absolute inset-0 grayscale brightness-[0.7] contrast-125">
-                <div ref={mapContainer} className="w-full h-full" />
-              </div>
+      {/* ═══════════════════════════════════════════════
+          SECTION 3: SKILLS MARQUEE
+          ═══════════════════════════════════════════════ */}
+      <section className="py-16 md:py-24 space-y-4 overflow-hidden">
+        <Marquee
+          items={["RUST", "SOLANA", "TYPESCRIPT", "REACT", "PCB DESIGN", "WEB3"]}
+          speed={25}
+        />
+        <Marquee
+          items={["NEXT.JS", "TAILWIND", "HARDWARE", "OPEN SOURCE", "MICROCONTROLLERS", "ANCHOR"]}
+          speed={30}
+          reverse
+        />
+      </section>
 
-              <div className="absolute bottom-3 right-3 flex flex-col gap-1.5 z-30">
-                <button
-                  onClick={() => setZoom((z) => Math.min(z + 1, 18))}
-                  className="p-1.5 bg-black/70 border border-white/10 rounded-lg hover:border-[#9333ea]/50 text-white/60 hover:text-white transition-all"
-                >
-                  <ZoomIn size={14} />
-                </button>
-                <button
-                  onClick={() => setZoom((z) => Math.max(z - 1, 1))}
-                  className="p-1.5 bg-black/70 border border-white/10 rounded-lg hover:border-[#9333ea]/50 text-white/60 hover:text-white transition-all"
-                >
-                  <ZoomOut size={14} />
-                </button>
-              </div>
-            </div>
-
-            {/* Tech Stack Card */}
-            <div className="md:col-span-7 glass-card p-8 flex flex-col justify-center">
-              <span className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] flex items-center gap-2 mb-6">
-                <Code2 size={12} /> Tech Stack
+      {/* ═══════════════════════════════════════════════
+          SECTION 4: TECH STACK (Detail Grid)
+          ═══════════════════════════════════════════════ */}
+      <section className="relative py-24 md:py-32 px-6">
+        <div className="max-w-5xl mx-auto">
+          <FadeIn>
+            <div className="flex items-center gap-3 mb-12">
+              <Code2 size={16} className="text-[#9333ea]/60" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/30">
+                Tech Stack
               </span>
-              <div className="flex flex-wrap gap-3">
-                {skills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-[#9333ea]/30 hover:bg-white/[0.06] transition-all group cursor-default"
-                  >
-                    <div
-                      className="w-2 h-2 rounded-full shrink-0"
-                      style={{ backgroundColor: skill.color }}
-                    />
-                    <span className="text-sm font-semibold text-white/60 group-hover:text-white transition-colors">
-                      {skill.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
             </div>
-          </div>
+          </FadeIn>
 
-          {/* Stats Row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <StatCard
-              icon={<Users size={18} />}
-              label="Followers"
-              value={profile?.followers ?? "—"}
-            />
-            <StatCard
-              icon={<GitBranch size={18} />}
-              label="Repos"
-              value={profile?.public_repos ?? "—"}
-            />
-            <StatCard icon={<Star size={18} />} label="Stars" value="156" />
-            <StatCard
-              icon={<Globe size={18} />}
-              label="Status"
-              value="Online"
-            />
-          </div>
-        </AnimatedSection>
-
-        {/* ═══ PROJECTS ═══ */}
-        <AnimatedSection id="projects" className="py-24 space-y-10">
-          <SectionLabel icon={<Sparkles size={16} />} text="Featured Work" />
-
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-white">
-            Projects
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {projects.map((p, i) => (
-              <motion.a
-                key={p.name}
-                href={p.link}
-                target="_blank"
-                rel="noreferrer"
-                className="group block glass-card p-7 hover:border-white/15 transition-all relative overflow-hidden"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.1,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                <div className="relative z-10 space-y-4">
-                  <div className="flex justify-between items-start">
-                    <div className="flex items-center gap-3">
-                      <h3 className="text-lg font-bold text-white group-hover:text-[#9333ea] transition-colors">
-                        {p.name}
-                      </h3>
-                      {p.wip && (
-                        <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                          WIP
-                        </span>
-                      )}
-                    </div>
-                    <ExternalLink
-                      size={16}
-                      className="text-white/20 group-hover:text-white/50 transition-colors shrink-0 mt-1"
-                    />
-                  </div>
-
-                  <p className="text-sm text-white/35 leading-relaxed line-clamp-2 group-hover:text-white/50 transition-colors">
-                    {p.description}
-                  </p>
-
-                  <div className="flex items-center gap-2 pt-4 border-t border-white/[0.05]">
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: p.accent }}
-                    />
-                    <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/30">
-                      {p.language}
-                    </span>
-                  </div>
+          <div className="flex flex-wrap gap-3">
+            {skills.map((skill, i) => (
+              <FadeIn key={skill.name} delay={i * 0.05}>
+                <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-[#9333ea]/25 hover:bg-white/[0.04] transition-all duration-300 group cursor-default">
+                  <div
+                    className="w-2.5 h-2.5 rounded-full shrink-0"
+                    style={{ backgroundColor: skill.color }}
+                  />
+                  <span className="text-sm font-semibold text-white/50 group-hover:text-white/80 transition-colors duration-300">
+                    {skill.name}
+                  </span>
                 </div>
-
-                {/* Hover glow */}
-                <div
-                  className="absolute -top-12 -right-12 w-40 h-40 rounded-full blur-[80px] opacity-0 group-hover:opacity-[0.08] transition-opacity duration-500"
-                  style={{ backgroundColor: p.accent }}
-                />
-              </motion.a>
+              </FadeIn>
             ))}
           </div>
-        </AnimatedSection>
+        </div>
+      </section>
 
-        {/* ═══ CONTACT ═══ */}
-        <AnimatedSection
-          id="contact"
-          className="py-32 flex flex-col items-center text-center space-y-10"
-        >
-          <SectionLabel icon={<Mail size={16} />} text="Get In Touch" />
+      {/* Divider */}
+      <div className="divider mx-6 md:mx-auto md:max-w-5xl" />
 
-          <h2 className="text-5xl md:text-7xl font-black tracking-tight text-white leading-[0.95]">
+      {/* ═══════════════════════════════════════════════
+          SECTION 5: PROJECTS
+          ═══════════════════════════════════════════════ */}
+      <section id="projects" className="relative py-24 md:py-32 px-6">
+        <div className="max-w-5xl mx-auto space-y-12">
+          <FadeIn>
+            <div className="space-y-3">
+              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#9333ea]/60">
+                Featured Work
+              </span>
+              <h2 className="text-4xl md:text-6xl font-black tracking-tight text-white">
+                Projects
+              </h2>
+            </div>
+          </FadeIn>
+
+          <div className="space-y-5">
+            {projects.map((p, i) => (
+              <ProjectCard key={p.name} project={p} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="divider mx-6 md:mx-auto md:max-w-5xl" />
+
+      {/* ═══════════════════════════════════════════════
+          SECTION 6: DASHBOARD (Map + Stats)
+          ═══════════════════════════════════════════════ */}
+      <section className="relative py-24 md:py-32 px-6">
+        <div className="max-w-5xl mx-auto space-y-8">
+          <FadeIn>
+            <div className="flex items-center gap-3 mb-4">
+              <MapPin size={16} className="text-[#9333ea]/60" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/30">
+                Base Station
+              </span>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+              {/* Map Card */}
+              <div className="md:col-span-7 glass-card overflow-hidden relative min-h-[350px]">
+                <div className="absolute top-0 left-0 right-0 p-4 flex items-center justify-between z-20 bg-gradient-to-b from-[#030303]/90 to-transparent">
+                  <span className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] flex items-center gap-2">
+                    <MapPin size={11} /> Location
+                  </span>
+                  <span className="text-[10px] text-white/20 tracking-wider uppercase">
+                    Faridabad · India
+                  </span>
+                </div>
+
+                <div className="absolute inset-0 grayscale brightness-[0.65] contrast-125">
+                  <div ref={mapContainer} className="w-full h-full" />
+                </div>
+
+                <div className="absolute bottom-3 right-3 flex flex-col gap-1.5 z-30">
+                  <button
+                    data-cursor="pointer"
+                    onClick={() => setZoom((z) => Math.min(z + 1, 18))}
+                    className="p-1.5 bg-black/70 border border-white/10 rounded-lg hover:border-[#9333ea]/40 text-white/40 hover:text-white transition-all"
+                  >
+                    <ZoomIn size={14} />
+                  </button>
+                  <button
+                    data-cursor="pointer"
+                    onClick={() => setZoom((z) => Math.max(z - 1, 1))}
+                    className="p-1.5 bg-black/70 border border-white/10 rounded-lg hover:border-[#9333ea]/40 text-white/40 hover:text-white transition-all"
+                  >
+                    <ZoomOut size={14} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Stats */}
+              <div className="md:col-span-5 grid grid-cols-2 gap-4">
+                <StatCard
+                  icon={<Users size={18} />}
+                  label="Followers"
+                  value={profile?.followers ?? "—"}
+                />
+                <StatCard
+                  icon={<GitBranch size={18} />}
+                  label="Repos"
+                  value={profile?.public_repos ?? "—"}
+                />
+                <StatCard
+                  icon={<Star size={18} />}
+                  label="Stars"
+                  value="156"
+                />
+                <StatCard
+                  icon={<Globe size={18} />}
+                  label="Status"
+                  value="Online"
+                />
+              </div>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.2}>
+            <div className="glass-card p-6 md:p-8 flex flex-col items-center overflow-x-auto">
+              <GitHubCalendar
+                username="ansh3108"
+                colorScheme="dark"
+                theme={{
+                  dark: ["#161b22", "#3b1e5d", "#592789", "#7830b5", "#9333ea"] // Custom dark to purple gradient
+                }}
+              />
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════
+          SECTION 7: CONTACT
+          ═══════════════════════════════════════════════ */}
+      <section
+        id="contact"
+        className="relative py-32 md:py-48 px-6 flex flex-col items-center text-center"
+      >
+        <FadeIn className="space-y-8 flex flex-col items-center">
+          <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#9333ea]/60">
+            Contact
+          </span>
+
+          <h2 className="text-5xl md:text-8xl font-black tracking-tight text-white leading-[0.9]">
             Let&apos;s build
             <br />
-            <span className="text-[#9333ea]">something</span> together.
+            <span className="text-gradient">something</span> together.
           </h2>
 
-          <p className="text-white/35 max-w-md text-base leading-relaxed">
-            Got a project, an idea, or just want to chat about Rust, Solana, or
+          <p className="text-white/25 max-w-md text-base leading-relaxed">
+            Got a project, an idea, or just want to talk about Rust, Solana, or
             hardware? I&apos;m always open.
           </p>
 
           <a
             href="mailto:hey@anshk.dev"
-            className="group relative inline-flex items-center gap-3 bg-white text-[#0a0a0a] px-10 py-4 rounded-full font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-all shadow-lg"
+            data-cursor="pointer"
+            className="group relative inline-flex items-center gap-3 bg-white text-[#0a0a0a] px-10 py-4 rounded-full font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-lg"
           >
             <Mail size={18} />
             hey@anshk.dev
-            <div className="absolute inset-0 rounded-full bg-[#9333ea] blur-2xl opacity-0 group-hover:opacity-30 -z-10 transition-opacity duration-500" />
+            <div className="absolute inset-0 rounded-full bg-[#9333ea] blur-2xl opacity-0 group-hover:opacity-25 -z-10 transition-opacity duration-500" />
           </a>
 
-          <SocialLinks className="pt-2" />
-        </AnimatedSection>
+          <SocialLinks className="pt-4" />
+        </FadeIn>
 
-        {/* ═══ FOOTER ═══ */}
-        <footer className="py-12 border-t border-white/[0.05] flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-medium text-white/20 uppercase tracking-[0.3em]">
+        {/* Ambient glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#9333ea]/[0.02] blur-[120px] pointer-events-none" />
+      </section>
+
+      {/* ═══════════════════════════════════════════════
+          FOOTER
+          ═══════════════════════════════════════════════ */}
+      <footer className="px-6 py-12 border-t border-white/[0.04]">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-medium text-white/15 uppercase tracking-[0.3em]">
           <span>© {new Date().getFullYear()} Ansh Kumar</span>
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>All systems operational</span>
           </div>
-        </footer>
-      </div>
+        </div>
+      </footer>
     </div>
   );
 }
