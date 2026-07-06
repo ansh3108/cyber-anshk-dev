@@ -1,31 +1,35 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Geist } from "next/font/google";
+import { Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const jetbrains = JetBrains_Mono({ 
+const geist = Geist({
   subsets: ["latin"],
-  variable: '--font-jetbrains'
+  variable: "--font-sans",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
-  title: "ansh@devbox:~",
-  description: "personal portfolio",
+  title: "Ansh Kumar — Builder",
+  description:
+    "Full-stack builder crafting decentralized systems, open-source tools, and hardware. Rust · Solana · TypeScript · PCB Design.",
   icons: {
     icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={cn("scroll-smooth", "font-sans", geist.variable)}>
-      <body className={`${jetbrains.variable} font-mono antialiased selection:bg-[#9333ea]/30`}>
-        {children}
-      </body>
+    <html lang="en" className={cn(geist.variable, jetbrainsMono.variable)}>
+      <body className="font-mono antialiased">{children}</body>
     </html>
   );
 }
