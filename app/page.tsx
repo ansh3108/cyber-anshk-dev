@@ -15,6 +15,11 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { TextReveal } from "@/components/TextReveal";
 import { Marquee } from "@/components/Marquee";
 import { GitHubCalendar } from "react-github-calendar";
+import { GlowCard } from "@/components/GlowCard";
+import { TiltCard } from "@/components/TiltCard";
+import { Magnetic } from "@/components/Magnetic";
+import { ParticleNetwork } from "@/components/ParticleNetwork";
+import { CommandPalette } from "@/components/CommandPalette";
 
 /* ─── Data ──────────────────────────────────────────── */
 
@@ -123,60 +128,64 @@ function ProjectCard({
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 md:p-10 transition-all duration-500 group-hover:border-white/[0.12] group-hover:bg-white/[0.04]">
-        {/* Number */}
-        <span className="absolute top-6 right-8 text-[80px] md:text-[120px] font-black text-white/[0.02] leading-none select-none group-hover:text-white/[0.04] transition-colors duration-500">
-          {project.number}
-        </span>
+      <TiltCard className="block">
+        <GlowCard className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 md:p-10 transition-all duration-500 group-hover:border-white/[0.12] group-hover:bg-white/[0.04] h-full w-full">
+          {/* Number */}
+          <span className="absolute top-6 right-8 text-[80px] md:text-[120px] font-black text-white/[0.02] leading-none select-none group-hover:text-white/[0.04] transition-colors duration-500">
+            {project.number}
+          </span>
 
-        <div className="relative z-10 space-y-5">
-          {/* Header */}
-          <div className="flex items-start justify-between">
-            <div className="space-y-2">
-              <div className="flex items-center gap-3">
-                <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-[#9333ea] transition-colors duration-300">
-                  {project.name}
-                </h3>
-                {project.wip && (
-                  <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                    WIP
+          <div className="relative z-10 space-y-5">
+            {/* Header */}
+            <div className="flex items-start justify-between">
+              <div className="space-y-2">
+                <div className="flex items-center gap-3">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-[#9333ea] transition-colors duration-300">
+                    {project.name}
+                  </h3>
+                  {project.wip && (
+                    <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                      WIP
+                    </span>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-2 h-2 rounded-full shrink-0"
+                    style={{ backgroundColor: project.accent }}
+                  />
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/25">
+                    {project.language}
                   </span>
-                )}
+                </div>
               </div>
-              <div className="flex items-center gap-2">
+
+              <Magnetic intensity={0.2}>
                 <div
-                  className="w-2 h-2 rounded-full shrink-0"
-                  style={{ backgroundColor: project.accent }}
-                />
-                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/25">
-                  {project.language}
-                </span>
-              </div>
+                  data-cursor="pointer"
+                  className="flex items-center justify-center w-10 h-10 rounded-full border border-white/[0.06] bg-white/[0.02] group-hover:border-[#9333ea]/30 group-hover:bg-[#9333ea]/10 transition-all duration-300"
+                >
+                  <ArrowUpRight
+                    size={16}
+                    className="text-white/30 group-hover:text-[#9333ea] transition-colors duration-300"
+                  />
+                </div>
+              </Magnetic>
             </div>
 
-            <div
-              data-cursor="pointer"
-              className="flex items-center justify-center w-10 h-10 rounded-full border border-white/[0.06] bg-white/[0.02] group-hover:border-[#9333ea]/30 group-hover:bg-[#9333ea]/10 transition-all duration-300"
-            >
-              <ArrowUpRight
-                size={16}
-                className="text-white/30 group-hover:text-[#9333ea] transition-colors duration-300"
-              />
-            </div>
+            {/* Description */}
+            <p className="text-sm md:text-base text-white/30 leading-relaxed max-w-xl group-hover:text-white/45 transition-colors duration-300">
+              {project.description}
+            </p>
           </div>
 
-          {/* Description */}
-          <p className="text-sm md:text-base text-white/30 leading-relaxed max-w-xl group-hover:text-white/45 transition-colors duration-300">
-            {project.description}
-          </p>
-        </div>
-
-        {/* Hover gradient */}
-        <div
-          className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full blur-[100px] opacity-0 group-hover:opacity-[0.06] transition-opacity duration-700"
-          style={{ backgroundColor: project.accent }}
-        />
-      </div>
+          {/* Hover gradient */}
+          <div
+            className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full blur-[100px] opacity-0 group-hover:opacity-[0.06] transition-opacity duration-700 pointer-events-none"
+            style={{ backgroundColor: project.accent }}
+          />
+        </GlowCard>
+      </TiltCard>
     </motion.a>
   );
 }
@@ -193,7 +202,7 @@ function StatCard({
   value: string | number;
 }) {
   return (
-    <div className="glass-card p-5 flex flex-col items-center gap-2 hover:border-white/15 transition-all group">
+    <GlowCard className="p-5 flex flex-col items-center gap-2 hover:border-white/15 transition-all group h-full w-full">
       <div className="text-white/20 group-hover:text-[#9333ea] transition-colors">
         {icon}
       </div>
@@ -203,7 +212,7 @@ function StatCard({
       <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.2em]">
         {label}
       </div>
-    </div>
+    </GlowCard>
   );
 }
 
@@ -273,6 +282,10 @@ export default function Home() {
     <div className="relative min-h-screen font-mono text-[#e6edf3] grain">
       {/* Custom Cursor */}
       <CustomCursor />
+      
+      {/* Background & Command Palette */}
+      <ParticleNetwork />
+      <CommandPalette />
 
       {/* Navbar */}
       <Navbar />
@@ -563,15 +576,17 @@ export default function Home() {
             hardware? I&apos;m always open.
           </p>
 
-          <a
-            href="mailto:hey@anshk.dev"
-            data-cursor="pointer"
-            className="group relative inline-flex items-center gap-3 bg-white text-[#0a0a0a] px-10 py-4 rounded-full font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-lg"
-          >
-            <Mail size={18} />
-            hey@anshk.dev
-            <div className="absolute inset-0 rounded-full bg-[#9333ea] blur-2xl opacity-0 group-hover:opacity-25 -z-10 transition-opacity duration-500" />
-          </a>
+          <Magnetic intensity={0.3}>
+            <a
+              href="mailto:hey@anshk.dev"
+              data-cursor="pointer"
+              className="group relative inline-flex items-center gap-3 bg-white text-[#0a0a0a] px-10 py-4 rounded-full font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-lg"
+            >
+              <Mail size={18} />
+              hey@anshk.dev
+              <div className="absolute inset-0 rounded-full bg-[#9333ea] blur-2xl opacity-0 group-hover:opacity-25 -z-10 transition-opacity duration-500" />
+            </a>
+          </Magnetic>
 
           <SocialLinks className="pt-4" />
         </FadeIn>

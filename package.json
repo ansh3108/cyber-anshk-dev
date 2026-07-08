@@ -15,6 +15,7 @@
     "@types/three": "^0.185.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
     "lucide-react": "^1.8.0",
     "maplibre-gl": "^5.22.0",
     "motion": "^12.38.0",

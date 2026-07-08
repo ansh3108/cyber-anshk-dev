@@ -1,0 +1,125 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { Command } from "cmdk";
+import { motion, AnimatePresence } from "motion/react";
+import { Home, User, Folder, Mail, Code, MessageSquare, Layers } from "lucide-react";
+
+export function CommandPalette() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setOpen((open) => !open);
+      }
+    };
+
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
+
+  const scrollTo = (id: string) => {
+    setOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const openLink = (url: string) => {
+    setOpen(false);
+    window.open(url, "_blank");
+  };
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999]"
+            onClick={() => setOpen(false)}
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="fixed top-[20%] left-1/2 -translate-x-1/2 w-full max-w-xl z-[10000] px-4"
+          >
+            <Command
+              className="bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden shadow-2xl shadow-purple-900/20"
+              loop
+            >
+              <div className="flex items-center border-b border-white/10 px-4">
+                <Command.Input
+                  autoFocus
+                  placeholder="Type a command or search..."
+                  className="w-full bg-transparent text-white placeholder:text-white/30 h-14 outline-none text-sm"
+                />
+              </div>
+
+              <Command.List className="max-h-[300px] overflow-y-auto p-2 scrollbar-hide">
+                <Command.Empty className="p-4 text-center text-sm text-white/40">
+                  No results found.
+                </Command.Empty>
+
+                <Command.Group heading="Navigation" className="text-xs font-medium text-white/40 px-2 py-3 [&_[cmdk-group-heading]]:mb-2 [&_[cmdk-group-heading]]:px-2">
+                  <Command.Item
+                    onSelect={() => scrollTo("home")}
+                    className="flex items-center gap-2 px-3 py-3 text-sm text-white/80 rounded-lg cursor-pointer aria-selected:bg-white/10 aria-selected:text-white transition-colors"
+                  >
+                    <Home size={16} className="text-[#9333ea]" /> Go to Home
+                  </Command.Item>
+                  <Command.Item
+                    onSelect={() => scrollTo("about")}
+                    className="flex items-center gap-2 px-3 py-3 text-sm text-white/80 rounded-lg cursor-pointer aria-selected:bg-white/10 aria-selected:text-white transition-colors"
+                  >
+                    <User size={16} className="text-[#9333ea]" /> About Me
+                  </Command.Item>
+                  <Command.Item
+                    onSelect={() => scrollTo("projects")}
+                    className="flex items-center gap-2 px-3 py-3 text-sm text-white/80 rounded-lg cursor-pointer aria-selected:bg-white/10 aria-selected:text-white transition-colors"
+                  >
+                    <Folder size={16} className="text-[#9333ea]" /> View Projects
+                  </Command.Item>
+                  <Command.Item
+                    onSelect={() => scrollTo("contact")}
+                    className="flex items-center gap-2 px-3 py-3 text-sm text-white/80 rounded-lg cursor-pointer aria-selected:bg-white/10 aria-selected:text-white transition-colors"
+                  >
+                    <Mail size={16} className="text-[#9333ea]" /> Contact
+                  </Command.Item>
+                </Command.Group>
+
+                <Command.Group heading="Socials" className="text-xs font-medium text-white/40 px-2 py-2 [&_[cmdk-group-heading]]:mb-2 [&_[cmdk-group-heading]]:px-2 border-t border-white/5 mt-2 pt-4">
+                  <Command.Item
+                    onSelect={() => openLink("https://github.com/ansh3108")}
+                    className="flex items-center gap-2 px-3 py-3 text-sm text-white/80 rounded-lg cursor-pointer aria-selected:bg-white/10 aria-selected:text-white transition-colors"
+                  >
+                    <Code size={16} /> GitHub
+                  </Command.Item>
+                  <Command.Item
+                    onSelect={() => openLink("https://x.com/anshkumar_")}
+                    className="flex items-center gap-2 px-3 py-3 text-sm text-white/80 rounded-lg cursor-pointer aria-selected:bg-white/10 aria-selected:text-white transition-colors"
+                  >
+                    <MessageSquare size={16} /> Twitter / X
+                  </Command.Item>
+                  <Command.Item
+                    onSelect={() => openLink("https://hackclub.com")}
+                    className="flex items-center gap-2 px-3 py-3 text-sm text-white/80 rounded-lg cursor-pointer aria-selected:bg-white/10 aria-selected:text-white transition-colors"
+                  >
+                    <Layers size={16} className="text-[#ec3136]" /> Hack Club
+                  </Command.Item>
+                </Command.Group>
+              </Command.List>
+            </Command>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
