@@ -164,4 +164,17 @@
     height: 1px;
     background: linear-gradient(to right, transparent, rgb(255 255 255 / 0.06) 20%, rgb(255 255 255 / 0.06) 80%, transparent);
   }
+
+  /* Hack Club link — zig-zag underline on hover */
+  .hackclub-link {
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-color: #ec3136;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+    cursor: pointer;
+  }
+  .hackclub-link:hover {
+    text-decoration-style: wavy;
+  }
 }

@@ -363,6 +363,13 @@ export default function Home() {
           <TextReveal
             text="I build decentralized systems on Solana. I ship at Hack Club and contribute to open-source. I craft hardware from circuit boards to microcontrollers, and chase the next frontier in Web3."
             className="text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.15] tracking-tight"
+            highlights={[
+              {
+                phrase: "Hack Club",
+                href: "https://hackclub.com",
+                color: "#ec3136",
+              },
+            ]}
           />
         </div>
       </section>
