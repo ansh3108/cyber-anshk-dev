@@ -24,8 +24,10 @@ export function GlitchText({ text, className = "", as: Component = "span" }: Gli
     return () => clearInterval(glitchInterval);
   }, []);
 
+  const Tag = Component as React.ElementType<React.HTMLAttributes<HTMLElement>>;
+
   return (
-    <Component
+    <Tag
       className={`relative inline-block ${className}`}
       onMouseEnter={() => setIsGlitching(true)}
       onMouseLeave={() => setIsGlitching(false)}
@@ -51,6 +53,6 @@ export function GlitchText({ text, className = "", as: Component = "span" }: Gli
           <span className="absolute top-0 left-0 text-white">{text}</span>
         </>
       )}
-    </Component>
+    </Tag>
   );
 }
