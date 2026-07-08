@@ -19,17 +19,15 @@ function AnimatedWord({
   children,
   progress,
   range,
-  addSpace,
 }: {
   children: string;
   progress: MotionValue<number>;
   range: [number, number];
-  addSpace?: boolean;
 }) {
   const opacity = useTransform(progress, range, [0.15, 1]);
 
   return (
-    <motion.span className={`inline-block${addSpace ? " mr-[0.25em]" : ""}`} style={{ opacity }}>
+    <motion.span className="inline" style={{ opacity }}>
       {children}
     </motion.span>
   );
@@ -91,17 +89,20 @@ export function TextReveal({ text, className, highlights = [] }: TextRevealProps
       for (let j = range.startIdx; j <= range.endIdx; j++) {
         const start = (j / words.length) * 0.7;
         const end = ((j + 1) / words.length) * 0.7 + 0.3;
-        const isLastWord = j === range.endIdx;
+        
         phraseElements.push(
           <AnimatedWord
             key={`${words[j]}-${j}`}
             progress={scrollYProgress}
             range={[start, end]}
-            addSpace={!isLastWord}
           >
             {words[j]}
           </AnimatedWord>
         );
+
+        if (j < range.endIdx) {
+          phraseElements.push(" ");
+        }
       }
 
       elements.push(
@@ -110,12 +111,16 @@ export function TextReveal({ text, className, highlights = [] }: TextRevealProps
           href={range.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="hackclub-link mr-[0.25em] inline"
+          className="hackclub-link inline whitespace-nowrap"
           style={{ color: range.color }}
         >
           {phraseElements}
         </a>
       );
+      
+      if (range.endIdx < words.length - 1) {
+        elements.push(" ");
+      }
 
       i = range.endIdx + 1;
     } else {
@@ -127,22 +132,28 @@ export function TextReveal({ text, className, highlights = [] }: TextRevealProps
           key={`${words[i]}-${i}`}
           progress={scrollYProgress}
           range={[start, end]}
-          addSpace
         >
           {words[i]}
         </AnimatedWord>
       );
+      
+      if (i < words.length - 1) {
+        elements.push(" ");
+      }
 
       i++;
     }
   }
 
   return (
-    <div
+    <p
       ref={containerRef}
-      className={`flex flex-wrap ${className ?? "text-4xl md:text-6xl font-bold leading-tight tracking-tight text-white"}`}
+      className={
+        className ??
+        "text-4xl md:text-6xl font-bold leading-tight tracking-tight text-white"
+      }
     >
       {elements}
-    </div>
+    </p>
   );
 }
