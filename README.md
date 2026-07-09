@@ -9,7 +9,4 @@ It is made around Solana's Purple theme.
 
 - All the information displayed(languages, projects etc.) are fetched from github and not hard-coded.
 - Map which matches the theme
-- Games Library which shows the games I'm currently playing
-
-
 
