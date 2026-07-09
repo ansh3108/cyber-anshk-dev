@@ -601,9 +601,16 @@ export default function Home() {
       <footer className="px-6 py-12 border-t border-white/[0.04]">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-medium text-white/15 uppercase tracking-[0.3em]">
           <span>© {new Date().getFullYear()} Ansh Kumar</span>
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>All systems operational</span>
+          <div className="flex items-center gap-1.5 text-sm text-white/60 normal-case tracking-wide">
+            <span>Made with 💖 and open source</span>
+            <a
+              href="https://github.com/ansh3108/cyber-anshk-dev" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="font-semibold text-white hover:text-[#0ff] underline decoration-white/30 hover:decoration-[#0ff]/50 underline-offset-4 transition-colors"
+            >
+              here!
+            </a>
           </div>
         </div>
       </footer>
