@@ -220,6 +220,7 @@ function StatCard({
 
 export default function Home() {
   const [profile, setProfile] = useState<Record<string, number> | null>(null);
+  const [totalStars, setTotalStars] = useState<number | null>(null);
   const [zoom, setZoom] = useState(10);
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
@@ -233,12 +234,42 @@ export default function Home() {
   const heroY = useTransform(heroProgress, [0, 1], [0, 200]);
   const heroOpacity = useTransform(heroProgress, [0, 0.8], [1, 0]);
 
-  // Fetch GitHub profile
+  // Fetch GitHub profile & total stars
   useEffect(() => {
     fetch("https://api.github.com/users/ansh3108")
       .then((res) => res.json())
       .then((d) => setProfile(d))
       .catch(() => {});
+
+    // Sum stargazers_count across all public repos
+    async function fetchStars() {
+      try {
+        let page = 1;
+        let stars = 0;
+        let hasMore = true;
+        while (hasMore) {
+          const res = await fetch(
+            `https://api.github.com/users/ansh3108/repos?per_page=100&page=${page}`
+          );
+          const repos = await res.json();
+          if (!Array.isArray(repos) || repos.length === 0) {
+            hasMore = false;
+          } else {
+            stars += repos.reduce(
+              (sum: number, r: { stargazers_count?: number }) =>
+                sum + (r.stargazers_count ?? 0),
+              0
+            );
+            hasMore = repos.length === 100;
+            page++;
+          }
+        }
+        setTotalStars(stars);
+      } catch {
+        // silently fail — StatCard will show "—"
+      }
+    }
+    fetchStars();
   }, []);
 
   // Init map
@@ -528,7 +559,7 @@ export default function Home() {
                 <StatCard
                   icon={<Star size={18} />}
                   label="Stars"
-                  value="156"
+                  value={totalStars ?? "—"}
                 />
                 <StatCard
                   icon={<Globe size={18} />}

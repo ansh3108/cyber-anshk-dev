@@ -103,7 +103,7 @@ export function CommandPalette() {
                     <Code size={16} /> GitHub
                   </Command.Item>
                   <Command.Item
-                    onSelect={() => openLink("https://x.com/anshkumar_")}
+                    onSelect={() => openLink("https://x.com/anshkdev")}
                     className="flex items-center gap-2 px-3 py-3 text-sm text-white/80 rounded-lg cursor-pointer aria-selected:bg-white/10 aria-selected:text-white transition-colors"
                   >
                     <MessageSquare size={16} /> Twitter / X
