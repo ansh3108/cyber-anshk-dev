@@ -18,7 +18,6 @@ import { GitHubCalendar } from "react-github-calendar";
 import { GlowCard } from "@/components/GlowCard";
 import { TiltCard } from "@/components/TiltCard";
 import { Magnetic } from "@/components/Magnetic";
-import { ParticleNetwork } from "@/components/ParticleNetwork";
 import { CommandPalette } from "@/components/CommandPalette";
 
 /* ─── Data ──────────────────────────────────────────── */
@@ -315,7 +314,6 @@ export default function Home() {
       <CustomCursor />
       
       {/* Background & Command Palette */}
-      <ParticleNetwork />
       <CommandPalette />
 
       {/* Navbar */}
@@ -633,7 +631,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-medium text-white/15 uppercase tracking-[0.3em]">
           <span>© {new Date().getFullYear()} Ansh Kumar</span>
           <div className="flex items-center gap-1.5 text-sm text-white/60 normal-case tracking-wide">
-            <span>Made with 💖 and open source</span>
+            <span>Made with 💖 + Typescript! and open source</span>
             <a
               href="https://github.com/ansh3108/cyber-anshk-dev" 
               target="_blank" 
