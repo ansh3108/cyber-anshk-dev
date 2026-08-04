@@ -125,7 +125,7 @@ export function Navbar() {
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
                 className={`
-                  relative flex items-center gap-1.5
+                  cursor-target relative flex items-center gap-1.5
                   px-4 py-2 rounded-full text-[13px] font-medium
                   transition-all duration-300 ease-out
                   ${

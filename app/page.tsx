@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { SocialLinks } from "@/components/SocialLinks";
-import { CustomCursor } from "@/components/CustomCursor";
+import TargetCursor from "@/components/TargetCursor";
 import { TextReveal } from "@/components/TextReveal";
 import { Marquee } from "@/components/Marquee";
 import { GitHubCalendar } from "react-github-calendar";
@@ -118,7 +118,7 @@ function ProjectCard({
       href={project.link}
       target="_blank"
       rel="noreferrer"
-      className="group block relative"
+      className="group block relative cursor-target"
       initial={{ opacity: 0, y: 60 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
@@ -201,7 +201,7 @@ function StatCard({
   value: string | number;
 }) {
   return (
-    <GlowCard className="p-5 flex flex-col items-center gap-2 hover:border-white/15 transition-all group h-full w-full">
+    <GlowCard className="cursor-target p-5 flex flex-col items-center gap-2 hover:border-white/15 transition-all group h-full w-full">
       <div className="text-white/20 group-hover:text-[#9333ea] transition-colors">
         {icon}
       </div>
@@ -311,7 +311,14 @@ export default function Home() {
   return (
     <div className="relative min-h-screen font-mono text-[#e6edf3] grain">
       {/* Custom Cursor */}
-      <CustomCursor />
+      <TargetCursor
+        spinDuration={2}
+        hideDefaultCursor={true}
+        parallaxOn={true}
+        cursorColor="#9333ea"
+        cursorColorOnTarget="#c084fc"
+        targetSelector=".cursor-target"
+      />
       
       {/* Background & Command Palette */}
       <CommandPalette />
@@ -448,7 +455,7 @@ export default function Home() {
           <div className="flex flex-wrap gap-3">
             {skills.map((skill, i) => (
               <FadeIn key={skill.name} delay={i * 0.05}>
-                <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-[#9333ea]/25 hover:bg-white/[0.04] transition-all duration-300 group cursor-default">
+                <div className="cursor-target flex items-center gap-3 px-5 py-3 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-[#9333ea]/25 hover:bg-white/[0.04] transition-all duration-300 group cursor-default">
                   <div
                     className="w-2.5 h-2.5 rounded-full shrink-0"
                     style={{ backgroundColor: skill.color }}
@@ -607,12 +614,12 @@ export default function Home() {
 
           <Magnetic intensity={0.3}>
             <a
-              href="mailto:hey@anshk.dev"
+              href="mailto:hello@anshk.dev"
               data-cursor="pointer"
-              className="group relative inline-flex items-center gap-3 bg-white text-[#0a0a0a] px-10 py-4 rounded-full font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-lg"
+              className="cursor-target group relative inline-flex items-center gap-3 bg-white text-[#0a0a0a] px-10 py-4 rounded-full font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-lg"
             >
               <Mail size={18} />
-              hey@anshk.dev
+              hello@anshk.dev
               <div className="absolute inset-0 rounded-full bg-[#9333ea] blur-2xl opacity-0 group-hover:opacity-25 -z-10 transition-opacity duration-500" />
             </a>
           </Magnetic>
@@ -636,7 +643,7 @@ export default function Home() {
               href="https://github.com/ansh3108/cyber-anshk-dev" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="font-semibold text-white hover:text-[#0ff] underline decoration-white/30 hover:decoration-[#0ff]/50 underline-offset-4 transition-colors"
+              className="cursor-target font-semibold text-white hover:text-[#0ff] underline decoration-white/30 hover:decoration-[#0ff]/50 underline-offset-4 transition-colors"
             >
               here!
             </a>

@@ -111,7 +111,7 @@ export function TextReveal({ text, className, highlights = [] }: TextRevealProps
           href={range.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="hackclub-link inline whitespace-nowrap"
+          className="cursor-target hackclub-link inline whitespace-nowrap"
           style={{ color: range.color }}
         >
           {phraseElements}
