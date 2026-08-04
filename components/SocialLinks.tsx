@@ -49,7 +49,7 @@ export function SocialLinks({ className }: { className?: string }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={link.name}
-          className="group h-11 w-11 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/15 transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center"
+          className="cursor-target group h-11 w-11 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/15 transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center"
         >
           {link.icon}
         </a>
