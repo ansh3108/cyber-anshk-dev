@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "motion/react";
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from "motion/react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import {
   GitBranch, Users, Star, Globe, MapPin,
-  Code2, ExternalLink, Mail,
+  Code2, ExternalLink, Mail, Check,
   ArrowDown, ZoomIn, ZoomOut, ArrowUpRight,
   GitCommit, GitFork,
 } from "lucide-react";
@@ -238,6 +238,57 @@ function ProjectCard({
         </GlowCard>
       </TiltCard>
     </motion.a>
+  );
+}
+
+/* ─── Copy Email Button ─────────────────────────────── */
+
+function CopyEmailButton() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText("hello@anshk.dev");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <Magnetic intensity={0.3}>
+      <button
+        onClick={handleCopy}
+        data-cursor="pointer"
+        className="cursor-target group relative inline-flex items-center justify-center gap-3 bg-white text-[#0a0a0a] min-w-[240px] h-[56px] rounded-full font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-lg overflow-hidden"
+      >
+        <AnimatePresence mode="wait">
+          {copied ? (
+            <motion.div
+              key="copied"
+              initial={{ y: 20, opacity: 0, filter: "blur(4px)" }}
+              animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+              exit={{ y: -20, opacity: 0, filter: "blur(4px)" }}
+              transition={{ duration: 0.2 }}
+              className="flex items-center gap-2 text-emerald-600"
+            >
+              <Check size={18} />
+              Copied to clipboard!
+            </motion.div>
+          ) : (
+            <motion.div
+              key="email"
+              initial={{ y: 20, opacity: 0, filter: "blur(4px)" }}
+              animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+              exit={{ y: -20, opacity: 0, filter: "blur(4px)" }}
+              transition={{ duration: 0.2 }}
+              className="flex items-center gap-3"
+            >
+              <Mail size={18} />
+              hello@anshk.dev
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <div className="absolute inset-0 rounded-full bg-[#9333ea] blur-2xl opacity-0 group-hover:opacity-25 -z-10 transition-opacity duration-500" />
+      </button>
+    </Magnetic>
   );
 }
 
@@ -847,17 +898,7 @@ export default function Home() {
             hardware? I&apos;m always open.
           </p>
 
-          <Magnetic intensity={0.3}>
-            <a
-              href="mailto:hello@anshk.dev"
-              data-cursor="pointer"
-              className="cursor-target group relative inline-flex items-center gap-3 bg-white text-[#0a0a0a] px-10 py-4 rounded-full font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-lg"
-            >
-              <Mail size={18} />
-              hello@anshk.dev
-              <div className="absolute inset-0 rounded-full bg-[#9333ea] blur-2xl opacity-0 group-hover:opacity-25 -z-10 transition-opacity duration-500" />
-            </a>
-          </Magnetic>
+          <CopyEmailButton />
 
           <SocialLinks className="pt-4" />
         </FadeIn>
