@@ -185,6 +185,7 @@ export default function Home() {
   const [totalForks, setTotalForks] = useState<number | null>(null);
   const [languages, setLanguages] = useState<LanguageStat[]>([]);
   const [recentCommits, setRecentCommits] = useState<CommitEntry[]>([]);
+  const [loadingStats, setLoadingStats] = useState(true);
   const [zoom, setZoom] = useState(10);
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
@@ -198,77 +199,38 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetch("https://api.github.com/users/ansh3108")
-      .then((res) => res.json())
-      .then((d) => setProfile(d))
-      .catch(() => {});
-
-    async function fetchRepoStats() {
+    async function fetchGithubStats() {
       try {
-        let page = 1;
-        let stars = 0;
-        let forks = 0;
-        const langMap: Record<string, number> = {};
-        let hasMore = true;
-        
-        while (hasMore && page <= 5) {
-          const res = await fetch(`https://api.github.com/users/ansh3108/repos?per_page=100&page=${page}`);
-          const repos = await res.json();
-          if (!Array.isArray(repos)) break;
-
-          for (const r of repos) {
-            stars += r.stargazers_count ?? 0;
-            forks += r.forks_count ?? 0;
-            if (!r.fork && r.language && r.size > 0) {
-              langMap[r.language] = (langMap[r.language] || 0) + r.size;
-            }
-          }
-          hasMore = repos.length === 100;
-          page++;
-        }
-        setTotalStars(stars);
-        setTotalForks(forks);
-
-        const totalSize = Object.values(langMap).reduce((a, b) => a + b, 0);
-        if (totalSize > 0) {
-          const sorted = Object.entries(langMap)
-            .map(([name, size]) => ({
-              name,
-              percentage: Math.round((size / totalSize) * 1000) / 10,
-              color: LANGUAGE_COLORS[name] || LANGUAGE_COLORS.Default,
-            }))
-            .sort((a, b) => b.percentage - a.percentage)
-            .slice(0, 5);
-          setLanguages(sorted);
-        }
-      } catch {}
-    }
-
-    async function fetchCommits() {
-      try {
-        const res = await fetch(
-          "https://api.github.com/search/commits?q=author:ansh3108&sort=author-date&order=desc",
-          { headers: { Accept: "application/vnd.github.cloak-preview" } }
-        );
+        const res = await fetch('/api/github');
         if (!res.ok) {
-          setRecentCommits([]);
+          setLoadingStats(false);
           return;
         }
         const data = await res.json();
-        if (!data || !Array.isArray(data.items)) return;
+        
+        if (data.profile) setProfile(data.profile);
+        if (data.stars !== undefined) setTotalStars(data.stars);
+        if (data.forks !== undefined) setTotalForks(data.forks);
+        
+        if (data.languages && Array.isArray(data.languages)) {
+           const withColors = data.languages.map((l: any) => ({
+             ...l,
+             color: LANGUAGE_COLORS[l.name] || LANGUAGE_COLORS.Default
+           }));
+           setLanguages(withColors);
+        }
 
-        const commits: CommitEntry[] = data.items.slice(0, 6).map((item: Record<string, any>) => ({
-          repo: item.repository.name,
-          message: item.commit.message.split("\n")[0],
-          url: item.html_url,
-          date: item.commit.author.date,
-        }));
-        setRecentCommits(commits);
-      } catch {}
+        if (data.commits && Array.isArray(data.commits)) {
+           setRecentCommits(data.commits);
+        }
+        
+        setLoadingStats(false);
+      } catch (e) {
+        setLoadingStats(false);
+      }
     }
 
-    fetchRepoStats();
-    fetchCommits();
+    fetchGithubStats();
   }, []);
 
   useEffect(() => {
@@ -327,7 +289,7 @@ export default function Home() {
             Hi, I'm <span className="text-white font-bold">Ansh Kumar.</span>
           </h2>
           <p className="text-[#A1A1AA] text-[18px] md:text-[20px] lg:text-[22px] leading-[1.7] font-light max-w-full">
-            I make CLI tools, craft hardware from circuit boards to microcontrollers, and passionate about Solana. I ship at <a href="https://hackclub.com" target="_blank" rel="noopener noreferrer" className="text-[#ec3750] font-medium underline decoration-1 underline-offset-4 hover:decoration-wavy">Hack Club</a>, and actively contribute to open-source.
+            I make CLI tools, craft hardware from circuit boards to microcontrollers, and passionate about Web3. I ship at <a href="https://hackclub.com" target="_blank" rel="noopener noreferrer" className="text-[#ec3750] font-medium underline decoration-1 underline-offset-4 hover:decoration-wavy">Hack Club</a>, and actively contribute to open-source.
             <br />
             <span className="italic text-white opacity-90 mt-3 block text-[16px] md:text-[18px] lg:text-[20px]">I'm also open to freelance collaborations.</span>
           </p>
@@ -451,7 +413,14 @@ export default function Home() {
                 <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-zinc-500">Languages Used</span>
               </div>
               <div className="space-y-4">
-                {languages.length === 0 ? Array.from({ length: 5 }).map((_, i) => (
+                {loadingStats ? (
+                  <div className="flex flex-col items-center justify-center py-6 gap-3">
+                    <div className="relative flex items-center justify-center w-8 h-8">
+                      <div className="absolute w-full h-full border-2 border-zinc-800 border-t-[#9B8CFF] rounded-full animate-spin"></div>
+                    </div>
+                    <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest animate-pulse">Fetching the Latest stats...</span>
+                  </div>
+                ) : languages.length === 0 ? Array.from({ length: 5 }).map((_, i) => (
                   <div key={i} className="space-y-1.5">
                     <div className="flex justify-between"><div className="h-3 w-16 bg-zinc-800 rounded animate-pulse" /><div className="h-3 w-8 bg-zinc-800 rounded animate-pulse" /></div>
                     <div className="h-2 w-full bg-zinc-800 rounded-full" />
@@ -482,12 +451,20 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-y-6 gap-x-4">
                 <div className="flex flex-col items-center gap-1.5">
                   <div className="text-zinc-500 group-hover/stats:text-[#9B8CFF] transition-colors"><GitBranch size={18} /></div>
-                  <div className="text-2xl font-black text-zinc-100 tabular-nums group-hover/stats:text-white transition-colors">{profile?.public_repos ?? "—"}</div>
+                  {loadingStats ? (
+                    <div className="h-8 w-12 bg-zinc-800 rounded animate-pulse my-1" />
+                  ) : (
+                    <div className="text-2xl font-black text-zinc-100 tabular-nums group-hover/stats:text-white transition-colors">{profile?.public_repos ?? "—"}</div>
+                  )}
                   <div className="text-[9px] font-bold text-zinc-500 uppercase tracking-[0.25em]">Repos</div>
                 </div>
                 <div className="flex flex-col items-center gap-1.5">
                   <div className="text-zinc-500 group-hover/stats:text-[#9B8CFF] transition-colors"><Users size={18} /></div>
-                  <div className="text-2xl font-black text-zinc-100 tabular-nums group-hover/stats:text-white transition-colors">{profile?.followers ?? "—"}</div>
+                  {loadingStats ? (
+                    <div className="h-8 w-12 bg-zinc-800 rounded animate-pulse my-1" />
+                  ) : (
+                    <div className="text-2xl font-black text-zinc-100 tabular-nums group-hover/stats:text-white transition-colors">{profile?.followers ?? "—"}</div>
+                  )}
                   <div className="text-[9px] font-bold text-zinc-500 uppercase tracking-[0.25em]">Followers</div>
                 </div>
                 <div className="flex flex-col items-center gap-1.5">
