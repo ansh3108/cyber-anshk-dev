@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Home, User, FolderGit2, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -53,8 +54,14 @@ export function SidebarLeft() {
         <div className="flex items-center justify-between w-full px-6 md:px-0 md:justify-center mb-4 pt-2">
           {/* Avatar / Initial */}
           <div className="relative group cursor-target block outline-none">
-            <div className="relative w-12 h-12 bg-zinc-900 rounded-2xl flex items-center justify-center border border-zinc-800 overflow-hidden shadow-none transition-all group-hover:border-[#9B8CFF]/50 group-hover:shadow-[0_0_15px_rgba(139,124,255,0.15)] font-black text-xl text-zinc-100">
-              AK
+            <div className="relative w-12 h-12 bg-zinc-900 rounded-2xl flex items-center justify-center border border-zinc-800 overflow-hidden shadow-none transition-all group-hover:border-[#9B8CFF]/50 group-hover:shadow-[0_0_15px_rgba(139,124,255,0.15)]">
+              <Image 
+                src="/Ansh.png" 
+                alt="Ansh Kumar" 
+                fill 
+                className="object-cover"
+                sizes="48px"
+              />
             </div>
             <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-[#151618] rounded-full flex items-center justify-center border-2 border-[#151618] z-10">
               <span className="relative flex h-2.5 w-2.5">

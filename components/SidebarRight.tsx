@@ -17,18 +17,18 @@ export function SidebarRight() {
   return (
     <aside className="hidden xl:flex flex-col w-[340px] min-w-[340px] p-6 gap-4 sticky top-0 h-screen overflow-y-auto border-l border-white/5 bg-transparent z-40">
       {/* Welcome Panel */}
-      <div className="rounded-xl px-6 py-5 bg-[#191A1E] border border-zinc-800">
-        <div className="flex items-center gap-2 mb-4">
-          <span className="text-[15px]">👋</span>
+      <div className="rounded-xl px-5 py-4 bg-[#191A1E] border border-zinc-800">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-[14px]">👋</span>
           <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">
             Welcome
           </span>
         </div>
-        <h3 className="text-zinc-100 text-lg font-bold mb-3">Glad to have you here.</h3>
-        <p className="text-zinc-400 text-[15px] mb-8 leading-relaxed">
+        <h3 className="text-zinc-100 text-[17px] font-bold mb-2.5">Glad to have you here.</h3>
+        <p className="text-zinc-400 text-[14px] mb-6 leading-relaxed">
           Feel free to reach out for collaborations or just a friendly hello!
         </p>
-        <div className="flex flex-col gap-3.5">
+        <div className="flex flex-col gap-3">
           <button
             onClick={handleCopyEmail}
             className="flex items-center gap-4 text-[15px] text-zinc-400 hover:text-white transition-colors group cursor-target text-left"
@@ -126,14 +126,14 @@ export function SidebarRight() {
       </div>
 
       {/* Tech Skills Panel */}
-      <div className="rounded-xl px-6 py-5 bg-[#191A1E] border border-zinc-800 shadow-sm relative overflow-hidden group/skills">
+      <div className="rounded-xl px-5 py-4 bg-[#191A1E] border border-zinc-800 shadow-sm relative overflow-hidden group/skills">
         <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle,rgba(139,124,255,0.02)_0%,transparent_70%)] pointer-events-none" />
-        <h3 className="text-zinc-100 font-bold mb-5 text-sm tracking-wide uppercase">
+        <h3 className="text-zinc-100 font-bold mb-4 text-[14px] tracking-wide uppercase">
           Technical Skills
         </h3>
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4">
           <div>
-            <h4 className="text-zinc-500 text-[11px] font-bold mb-3 uppercase tracking-wider">
+            <h4 className="text-zinc-500 text-[11px] font-bold mb-2 uppercase tracking-wider">
               Programming Languages
             </h4>
             <div className="flex flex-wrap gap-2">
@@ -145,7 +145,7 @@ export function SidebarRight() {
             </div>
           </div>
           <div>
-            <h4 className="text-zinc-500 text-[11px] font-bold mb-3 uppercase tracking-wider">
+            <h4 className="text-zinc-500 text-[11px] font-bold mb-2 uppercase tracking-wider">
               Technologies
             </h4>
             <div className="flex flex-wrap gap-2">
@@ -157,7 +157,7 @@ export function SidebarRight() {
             </div>
           </div>
           <div>
-            <h4 className="text-zinc-500 text-[11px] font-bold mb-3 uppercase tracking-wider">
+            <h4 className="text-zinc-500 text-[11px] font-bold mb-2 uppercase tracking-wider">
               Tools
             </h4>
             <div className="flex flex-wrap gap-2">
