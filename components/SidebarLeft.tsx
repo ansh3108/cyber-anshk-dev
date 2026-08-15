@@ -23,8 +23,14 @@ export function SidebarLeft() {
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-[#151618]/80 backdrop-blur-md border-b border-zinc-800 z-50 px-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <div className="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center font-bold text-zinc-100 text-sm relative z-10">
-              AK
+            <div className="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center relative z-10 overflow-hidden">
+              <Image 
+                src="/Ansh.png" 
+                alt="Ansh Kumar" 
+                fill 
+                className="object-cover"
+                sizes="36px"
+              />
             </div>
             <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-[#151618] rounded-full flex items-center justify-center border border-[#151618] z-20">
               <div className="w-1.5 h-1.5 bg-[#9B8CFF] rounded-full"></div>
