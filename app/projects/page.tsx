@@ -9,37 +9,22 @@ const projects = [
     description: "A hardware module providing four 5V output ports from a single USB input. Custom circuit routing and fabricated PCB.",
     link: "https://oshwlab.com/itz.anshkumar/usb-hub",
     language: "Hardware / PCB",
-    milestones: [
-      { date: "Oct 2025", title: "Circuit Design", desc: "Started designing the schematic for the USB Hub in EasyEDA." },
-      { date: "Nov 2025", title: "PCB Routing", desc: "Completed the complex trace routing and power planes." },
-      { date: "Dec 2025", title: "Fabrication", desc: "Sent the Gerber files for manufacturing and assembled the final board." }
-    ],
     tech: ["EasyEDA", "Hardware", "PCB Routing", "Soldering"]
   },
   {
-    name: "Parallax",
-    category: "Software",
-    description: "2D projectile physics simulation built with HTML5 Canvas. Math for gravity, velocity, and collision detection.",
-    link: "https://github.com/ansh3108/Parallax",
-    language: "Javascript / Canvas",
-    milestones: [
-      { date: "Mar 2025", title: "Math Engine", desc: "Implemented the core physics equations for gravity and velocity." },
-      { date: "Apr 2025", title: "Canvas Renderer", desc: "Built the rendering engine using HTML5 Canvas." },
-      { date: "May 2025", title: "Collision Detection", desc: "Added boundaries and elastic collision detection." }
-    ],
-    tech: ["JavaScript", "HTML5 Canvas", "Physics Engine"]
+    name: "NFC Business Card",
+    category: "Hardware",
+    description: "An NFC-powered business card that harvests energy from nearby devices to instantly light up an LED.",
+    link: "https://oshwlab.com/itz.anshkumar/nfc-business-card_copy_copy_copy",
+    language: "Hardware / PCB",
+    tech: ["EasyEDA", "Hardware", "PCB Routing"]
   },
   {
     name: "Commit-to-Quest",
-    category: "Web3 / Software",
+    category: "Game / Software",
     description: "Turns your GitHub activity into an 8-bit RPG adventure. Level up with every commit.",
     link: "https://github.com/ansh3108/Commit-to-Quest",
     language: "TypeScript",
-    milestones: [
-      { date: "Jun 2025", title: "GitHub API Integration", desc: "Successfully fetched commit histories and webhooks." },
-      { date: "Jul 2025", title: "RPG Logic", desc: "Created the leveling system and experience calculations." },
-      { date: "Aug 2025", title: "Launch", desc: "Released the MVP with 8-bit themed UI." }
-    ],
     tech: ["TypeScript", "Next.js", "GitHub API", "Tailwind CSS"]
   },
   {
@@ -48,13 +33,15 @@ const projects = [
     description: "Rust-based terminal productivity tool. Custom TUI to track focused sessions while interfacing with local project environments.",
     link: "https://github.com/ansh3108/Terminal-Quest",
     language: "Rust / Anchor",
-    wip: true,
-    milestones: [
-      { date: "Sep 2025", title: "TUI Foundation", desc: "Started building the Terminal UI using ratatui in Rust." },
-      { date: "Oct 2025", title: "Session Tracking", desc: "Added logic to measure focus time and active windows." },
-      { date: "Present", title: "Solana Anchor Integration", desc: "Currently integrating Solana for on-chain proof of work." }
-    ],
+    wip: false,
     tech: ["Rust", "TUI", "Solana", "Anchor"]
+  },
+  {
+    name: "Markdown CLI",
+    category: "Tool",
+    description: "CLI tool to convert Markdown files to a static website.",
+    link: "https://github.com/ansh3108/markdown-cli",
+    tech: ["Rust", "CLI", "TUI"]
   }
 ];
 
