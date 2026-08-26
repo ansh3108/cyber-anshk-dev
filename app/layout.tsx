@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, JetBrains_Mono } from "next/font/google";
+import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { SidebarLeft } from "@/components/SidebarLeft";
-import { SidebarRight } from "@/components/SidebarRight";
-import TargetCursor from "@/components/TargetCursor";
-import { CommandPalette } from "@/components/CommandPalette";
+import { ThemeProvider } from "./providers";
+import { Nav } from "@/components/nav";
+import { SideNav } from "@/components/side-nav";
+import { CmdPalette } from "@/components/cmd-palette";
+import { Footer } from "@/components/footer";
+import { EasterEggs } from "@/components/easter-eggs";
 
-const geist = Geist({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+const instrumentSerif = Instrument_Serif({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-serif",
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -18,9 +26,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ansh Kumar — Builder",
-  description:
-    "Full-stack builder crafting decentralized systems, open-source tools, and hardware. Rust · Solana · TypeScript · PCB Design.",
+  title: "Ansh Kumar — anshk.dev",
+  description: "Full-stack builder, hardware hacker, engineer.",
   icons: {
     icon: "/icon.svg",
   },
@@ -32,36 +39,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn(geist.variable, jetbrainsMono.variable, "dark")}>
-      <body className="font-sans antialiased bg-[#151618] text-[#F4F4F5] min-h-screen relative selection:bg-[#9B8CFF]/20">
-        <TargetCursor
-          spinDuration={2}
-          hideDefaultCursor={true}
-          parallaxOn={true}
-          cursorColor="#A1A1AA"
-          cursorColorOnTarget="#9B8CFF"
-          targetSelector=".cursor-target"
-        />
-        <CommandPalette />
-
-        {/* Subtle Ambient Lighting */}
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-          <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(circle,rgba(139,124,255,0.025)_0%,transparent_70%)] mix-blend-screen" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(circle,rgba(110,168,255,0.015)_0%,transparent_70%)] mix-blend-screen" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(17,18,20,0.95)_100%)] pointer-events-none" />
-        </div>
-
-        <div className="flex min-h-screen grain relative z-10">
-          <SidebarLeft />
-          <main className="flex-1 md:ml-20 w-full pt-16 md:pt-0">
-            <div className="w-full max-w-[1600px] mx-auto grid grid-cols-1 xl:grid-cols-[1fr_minmax(280px,25%)] 2xl:grid-cols-[1fr_340px]">
-              <div className="px-4 md:px-8 xl:px-12 py-6 min-w-0">
-                {children}
-              </div>
-              <SidebarRight />
+    <html lang="en" suppressHydrationWarning className={cn(inter.variable, instrumentSerif.variable, jetbrainsMono.variable)}>
+      <body className="font-sans antialiased bg-white dark:bg-[#0a0a0a] text-zinc-900 dark:text-zinc-100 min-h-screen selection:bg-black/10 dark:selection:bg-white/10 transition-colors duration-300">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <CmdPalette />
+          <EasterEggs />
+          
+          <div className="flex min-h-screen max-w-[1600px] mx-auto px-6 sm:px-12 md:px-24 lg:px-32 xl:px-48 relative">
+            <SideNav />
+            <div className="flex-1 w-full min-w-0 pb-24">
+              <Nav />
+              <main>{children}</main>
+              <Footer />
             </div>
-          </main>
-        </div>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
