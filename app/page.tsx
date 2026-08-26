@@ -266,7 +266,7 @@ export default function Home() {
   }, [zoom]);
 
   return (
-    <div className="flex flex-col w-full mx-auto pb-20 max-w-[1200px] px-6 lg:px-12 pt-8 md:pt-24 lg:pt-32">
+    <div className="flex flex-col w-full mx-auto pb-20 max-w-[1200px] px-6 lg:px-12 pt-2 md:pt-8 lg:pt-12">
       
       {/* Hero Section */}
       <div className="animate-in fade-in slide-in-from-bottom-8 duration-700 relative w-full text-left">

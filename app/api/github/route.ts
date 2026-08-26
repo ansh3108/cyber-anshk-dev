@@ -46,8 +46,6 @@ export async function GET() {
     for (let i = 0; i < repos.length; i += BATCH_SIZE) {
       const batch = repos.slice(i, i + BATCH_SIZE);
       await Promise.all(batch.map(async (r) => {
-        if (r.name === 'crud-solana') return; // Ignore this specific repo
-
         stars += r.stargazers_count ?? 0;
         forks += r.forks_count ?? 0;
         

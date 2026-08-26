@@ -53,9 +53,9 @@ export default function RootLayout({
 
         <div className="flex min-h-screen grain relative z-10">
           <SidebarLeft />
-          <main className="flex-1 md:ml-20 flex justify-center w-full pt-16 md:pt-0">
-            <div className="w-full max-w-[1600px] flex mx-auto">
-              <div className="flex-1 px-4 md:px-12 py-6 w-full max-w-full xl:max-w-[calc(100%-340px)]">
+          <main className="flex-1 md:ml-20 w-full pt-16 md:pt-0">
+            <div className="w-full max-w-[1600px] mx-auto grid grid-cols-1 xl:grid-cols-[1fr_minmax(280px,25%)] 2xl:grid-cols-[1fr_340px]">
+              <div className="px-4 md:px-8 xl:px-12 py-6 min-w-0">
                 {children}
               </div>
               <SidebarRight />
