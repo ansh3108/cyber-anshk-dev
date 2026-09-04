@@ -21,7 +21,7 @@ export default function Resume() {
         <div>
           <h1 className="text-3xl font-bold text-zinc-100 mb-2 print:text-4xl print:mb-1">Ansh Kumar</h1>
           <p className="text-zinc-500 print:text-sm print:font-medium">
-            Full-Stack Builder & Hardware Engineer • Delhi, India
+            Full-Stack Builder & Hardware Engineer • Bengaluru, India
           </p>
           <div className="hidden print:flex print:flex-wrap print:gap-4 print:text-xs print:mt-2 print:text-gray-600">
             <span>hello@anshk.dev</span>

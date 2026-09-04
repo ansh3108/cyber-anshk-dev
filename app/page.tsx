@@ -13,7 +13,7 @@ const FadeIn = ({ children, delay = 0, className = "" }: { children: React.React
   <motion.div
     initial={{ opacity: 0, y: 15 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-10%" }}
+    viewport={{ once: true, margin: "0px" }}
     transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
     className={className}
   >
@@ -51,8 +51,8 @@ export default function Home() {
     <div className="flex flex-col gap-32 md:gap-40 pb-24 w-full">
       
       {/* 00: HERO */}
-      <section id="hero" className="min-h-[calc(100svh-160px)] flex flex-col justify-start relative w-full pt-8 md:pt-16 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 items-start w-full">
+      <section id="hero" className="min-h-[calc(100svh-160px)] flex flex-col justify-start relative w-full pt-2 md:pt-4 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-8 lg:gap-y-4 items-start w-full">
           
           {/* Rail */}
           <div className="md:col-span-1 flex flex-col mt-2 md:mt-4">
@@ -61,61 +61,64 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Left Flow (Name + Meta) */}
-          <div className="md:col-span-6 xl:col-span-7 flex flex-col relative z-10 -ml-[0.04em] min-w-0">
+          {/* Main Hero Content Area */}
+          <div className="md:col-span-11 flex flex-col w-full relative z-10 -ml-[0.04em] min-w-0">
             
-            {/* 1. Name */}
+            {/* ROW 1: Name */}
             <FadeIn>
-              <h1 className="text-[5rem] sm:text-[6.5rem] md:text-[6rem] lg:text-[7.5rem] xl:text-[9.5rem] font-serif leading-[0.85] tracking-tighter text-zinc-900 dark:text-zinc-100 flex flex-col break-words">
+              <h1 className="text-[5rem] sm:text-[6rem] md:text-[7rem] lg:text-[8.5rem] xl:text-[10.5rem] font-serif leading-[0.85] tracking-tighter text-zinc-900 dark:text-zinc-100 flex flex-col break-words">
                 <span>Ansh</span>
-                <span className="pl-6 lg:pl-12 xl:pl-16 text-zinc-700 dark:text-zinc-400">Kumar.</span>
+                <span className="pl-6 lg:pl-16 xl:pl-32 text-zinc-700 dark:text-zinc-400">Kumar.</span>
               </h1>
             </FadeIn>
 
-            {/* 2. Metadata (Focus / Location) */}
-            <FadeIn delay={0.1}>
-              <div className="flex flex-col gap-6 font-mono text-[10px] text-zinc-500 uppercase tracking-widest mt-12 md:mt-16 pl-2 lg:pl-12 xl:pl-16">
-                <div className="flex flex-col gap-1.5 border-l border-zinc-200 dark:border-zinc-800/50 pl-5">
-                  <span className="block text-zinc-400 dark:text-zinc-600">Focus</span>
-                  <span className="text-zinc-800 dark:text-zinc-300">Systems / Hardware</span>
-                </div>
-                <div className="flex flex-col gap-1.5 border-l border-zinc-200 dark:border-zinc-800/50 pl-5">
-                  <span className="block text-zinc-400 dark:text-zinc-600">Location</span>
-                  <span className="text-zinc-800 dark:text-zinc-300">Delhi, India</span>
-                </div>
+            {/* ROW 2: Meta (Left) & Description (Right) */}
+            <div className="grid grid-cols-1 md:grid-cols-11 gap-x-6 gap-y-12 mt-8 md:mt-12 xl:mt-12 w-full">
+              
+              {/* Meta */}
+              <div className="md:col-span-5 lg:col-span-4 pl-2 lg:pl-16 xl:pl-32">
+                <FadeIn delay={0.1}>
+                  <div className="flex flex-col gap-6 font-mono text-[10px] text-zinc-500 uppercase tracking-widest">
+                    <div className="flex flex-col gap-1.5 border-l border-zinc-200 dark:border-zinc-800/50 pl-5">
+                      <span className="block text-zinc-400 dark:text-zinc-600">Focus</span>
+                      <span className="text-zinc-800 dark:text-zinc-300">Systems / WEB3</span>
+                    </div>
+                    <div className="flex flex-col gap-1.5 border-l border-zinc-200 dark:border-zinc-800/50 pl-5">
+                      <span className="block text-zinc-400 dark:text-zinc-600">Location</span>
+                      <span className="text-zinc-800 dark:text-zinc-300">Bengaluru, India</span>
+                    </div>
+                  </div>
+                </FadeIn>
               </div>
-            </FadeIn>
 
-          </div>
+              {/* Description & Links */}
+              <div className="md:col-span-6 lg:col-span-7 xl:col-span-6 xl:col-start-6 flex flex-col items-end text-right gap-6 min-w-0">
+                <FadeIn delay={0.2}>
+                  <p className="text-xl sm:text-2xl lg:text-3xl xl:text-[2rem] font-light text-zinc-700 dark:text-zinc-300 leading-[1.4] max-w-[28ch]">
+                    {siteConfig.hero.subtitle}
+                  </p>
+                </FadeIn>
 
-          {/* Right Flow (Description + Socials) */}
-          <div className="md:col-span-5 xl:col-span-4 flex flex-col gap-10 md:pt-[7rem] lg:pt-[9rem] xl:pt-[11rem] min-w-0 mt-8 md:mt-0">
-            
-            {/* 3. Description */}
-            <FadeIn delay={0.2}>
-              <p className="text-2xl sm:text-3xl lg:text-[2rem] xl:text-[2.2rem] font-light text-zinc-700 dark:text-zinc-300 leading-[1.3] max-w-[28ch]">
-                {siteConfig.hero.subtitle}
-              </p>
-            </FadeIn>
-
-            {/* 4. Social Links */}
-            <FadeIn delay={0.3}>
-              <div className="flex flex-wrap gap-5 font-mono text-xs">
-                {Object.entries(siteConfig.links).map(([name, url]) => (
-                  <a 
-                    key={name} 
-                    href={url} 
-                    target={url.startsWith("http") ? "_blank" : undefined}
-                    rel={url.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="group flex items-center gap-2.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors relative overflow-hidden"
-                  >
-                    {name === "github" && getTechIcon("github")}
-                    <span className="relative z-10">{name}</span>
-                    <ArrowUpRight size={12} className="opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300 shrink-0" />
-                  </a>
-                ))}
+                <FadeIn delay={0.3}>
+                  <div className="flex flex-wrap justify-end gap-5 font-mono text-xs">
+                    {Object.entries(siteConfig.links).map(([name, url]) => (
+                      <a 
+                        key={name} 
+                        href={url} 
+                        target={url.startsWith("http") ? "_blank" : undefined}
+                        rel={url.startsWith("http") ? "noopener noreferrer" : undefined}
+                        className="group flex items-center gap-2.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors relative overflow-hidden"
+                      >
+                        {name === "github" && getTechIcon("github")}
+                        <span className="relative z-10">{name}</span>
+                        <ArrowUpRight size={12} className="opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300 shrink-0" />
+                      </a>
+                    ))}
+                  </div>
+                </FadeIn>
               </div>
-            </FadeIn>
+
+            </div>
 
           </div>
 

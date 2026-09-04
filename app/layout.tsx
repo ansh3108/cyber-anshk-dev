@@ -8,6 +8,7 @@ import { SideNav } from "@/components/side-nav";
 import { CmdPalette } from "@/components/cmd-palette";
 import { Footer } from "@/components/footer";
 import { EasterEggs } from "@/components/easter-eggs";
+import { KbdNotification } from "@/components/kbd-notification";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <CmdPalette />
           <EasterEggs />
+          <KbdNotification />
           
           <div className="flex min-h-screen max-w-[1600px] mx-auto px-6 sm:px-12 md:px-24 lg:px-32 xl:px-48 relative">
             <SideNav />
