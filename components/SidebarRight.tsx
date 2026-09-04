@@ -175,7 +175,7 @@ export function SidebarRight() {
       <div className="mt-auto pt-2 pb-2 border-t border-white/5 text-center">
         <p className="flex items-center justify-center gap-2 text-zinc-600 text-xs">
           <MapPin size={12} />
-          Delhi, India
+          Bengaluru, India
         </p>
       </div>
     </aside>

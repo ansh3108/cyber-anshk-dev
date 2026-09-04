@@ -39,7 +39,7 @@ export const Map = () => {
     new maplibregl.Marker({ element: markerEl })
       .setLngLat([lng, lat])
       .setPopup(new maplibregl.Popup({ offset: 18, closeButton: false })
-        .setHTML(`<span style="font-family:monospace;font-size:12px;color:#9333ea;font-weight:bold;">Delhi, India 🇮🇳</span>`))
+        .setHTML(`<span style="font-family:monospace;font-size:12px;color:#9333ea;font-weight:bold;">Bengaluru, India 🇮🇳</span>`))
       .addTo(map.current);
 
     map.current.dragRotate.disable();
