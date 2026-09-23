@@ -73,7 +73,7 @@ export const siteConfig = {
   ],
 
   ecosystem: {
-    languages: ["Rust", "TypeScript", "C++", "Python", "JavaScript"],
+    languages: ["Rust", "TypeScript", "C++", "Python", "JavaScript", "Java"],
     architecture: ["Next.js", "React", "Node.js", "Tailwind CSS", "MongoDB"],
     systems: ["Solana", "Docker", "Linux",]
   }
