@@ -5,6 +5,7 @@ import {
   SiTailwindcss, SiC, SiSolana
 } from "react-icons/si";
 import { FaAws } from "react-icons/fa";
+import { DiJava } from "react-icons/di";
 
 export function getTechIcon(name: string) {
   const normalized = name.toLowerCase().trim();
@@ -25,6 +26,7 @@ export function getTechIcon(name: string) {
     case "github": return <SiGithub className="w-[1.2em] h-[1.2em] text-zinc-900 dark:text-zinc-100" />;
     case "linux": return <SiLinux color="#FCC624" className="w-[1.2em] h-[1.2em]" />;
     case "aws": return <FaAws color="#FF9900" className="w-[1.2em] h-[1.2em]" />;
+    case "java": return <DiJava color="#E34F26" className="w-[1.4em] h-[1.4em]" />;
     case "cloudflare": return <SiCloudflare color="#F38020" className="w-[1.2em] h-[1.2em]" />;
     case "tailwind css": return <SiTailwindcss color="#06B6D4" className="w-[1.2em] h-[1.2em]" />;
     case "solana": return <SiSolana color="#14F195" className="w-[1.2em] h-[1.2em]" />;
