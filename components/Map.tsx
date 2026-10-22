@@ -55,8 +55,10 @@ export const Map = () => {
   }, []);
 
   return (
-    <div className="w-full h-full min-h-[300px] grayscale brightness-75 contrast-125">
-      <div ref={mapContainer} className="w-full h-full" />
+    <div className="w-full h-full min-h-[300px]">
+      <div className="w-full h-full grayscale brightness-90 contrast-110 dark:brightness-105 dark:grayscale-[40%]">
+        <div ref={mapContainer} className="w-full h-full" />
+      </div>
     </div>
   );
 };

@@ -35,14 +35,17 @@ export function EasterEggs() {
     if (document.getElementById("oneko-script")) return;
     const script = document.createElement("script");
     script.id = "oneko-script";
-    script.src = "https://rawgithub.com/adryd325/oneko.js/main/oneko.js";
+    script.src = "https://cdn.jsdelivr.net/gh/adryd325/oneko.js@main/oneko.js";
+    // Sprite: the script defaults to ./oneko.gif relative to the page,
+    // so point it at the sprite on the CDN explicitly.
+    script.dataset.cat = "https://cdn.jsdelivr.net/gh/adryd325/oneko.js@main/oneko.gif";
     document.body.appendChild(script);
   };
 
   return (
     <>
       {konamiActivated && (
-        <div className="fixed bottom-4 right-4 text-xs font-mono text-zinc-500 animate-pulse">
+        <div className="fixed bottom-4 right-4 z-50 border-[3px] border-ink bg-sun px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-widest shadow-[4px_4px_0_0_var(--color-ink)] rotate-2 animate-pulse">
           Meow! 🐱
         </div>
       )}

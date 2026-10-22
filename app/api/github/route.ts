@@ -72,7 +72,9 @@ export async function GET() {
         percentage: Math.round((bytes / totalBytes) * 1000) / 10,
       }))
       .sort((a, b) => b.percentage - a.percentage)
-      .slice(0, 5);
+      // top 10 — the client renders top-5 segments and folds the rest
+      // of the first 10 into an "Other" chip on the single stacked bar
+      .slice(0, 10);
 
     // 3. Fetch recent commits
     let commits = [];

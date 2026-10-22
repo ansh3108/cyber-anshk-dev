@@ -2,41 +2,58 @@
 
 import * as React from "react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import { siteConfig } from "@/lib/config";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { GitHubCalendar } from "react-github-calendar";
-import { useTheme } from "next-themes";
 import { TechBadge, getTechIcon } from "@/components/tech-icon";
+import { Sticker } from "@/components/Sticker";
+import { Marquee } from "@/components/Marquee";
+import { GithubStats } from "@/components/GithubStats";
+import { RecentCommits } from "@/components/RecentCommits";
+import { BengaluruMap } from "@/components/BengaluruMap";
 
 // Minimal fade up for sections
 const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number, className?: string }) => (
   <motion.div
-    initial={{ opacity: 0, y: 15 }}
+    initial={{ opacity: 0, y: 18 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "0px" }}
-    transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+    transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
     className={className}
   >
     {children}
   </motion.div>
 );
 
-// Standardized 2-column structural wrapper (Nav is external)
-// Desktop: 3 cols for label, 9 cols for content
-// Tablet: 4 cols for label, 8 cols for content
-// Mobile: 1 col stacked
-const SectionLayout = ({ index, title, children, id }: { index: string; title: string; children: React.ReactNode; id: string }) => (
-  <section id={id} className="scroll-mt-32 w-full">
+// Section scaffold: rotated number chip, display title, accent underline
+const SectionLayout = ({
+  index,
+  title,
+  accent,
+  children,
+  id,
+}: {
+  index: string;
+  title: string;
+  accent: string;
+  children: React.ReactNode;
+  id: string;
+}) => (
+  <section id={id} className="scroll-mt-28 w-full pt-28 md:pt-36">
     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
-      {/* Section Metadata Column */}
-      <div className="md:col-span-4 lg:col-span-3 md:sticky md:top-32 flex flex-col gap-2">
-        <span className="font-mono text-[10px] text-zinc-400 dark:text-zinc-500 uppercase tracking-[0.2em]">
+      <div className="@container md:col-span-4 lg:col-span-3 md:sticky md:top-24 flex flex-col gap-3 items-start">
+        <span className="brutal-sm brutal-press bg-ink text-paper font-mono text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 -rotate-2">
           [ {index} ]
         </span>
-        <h2 className="text-3xl lg:text-4xl font-serif tracking-tight leading-tight">{title}</h2>
+        {/* Font size is a % of the column's own width (cqw), so single-word
+            titles like "Experience" can never bleed into the content column. */}
+        <h2 className="font-display uppercase leading-[0.95] tracking-tight text-[clamp(1.2rem,12.5cqw,2.9rem)]">
+          {title}
+        </h2>
+        <div className={`h-3.5 w-28 border-[3px] border-ink shadow-[4px_4px_0_0_var(--color-ink)] ${accent}`} />
       </div>
 
-      {/* Main Content Column */}
       <div className="md:col-span-8 lg:col-span-9 flex flex-col min-w-0">
         {children}
       </div>
@@ -44,136 +61,232 @@ const SectionLayout = ({ index, title, children, id }: { index: string; title: s
   </section>
 );
 
+const LINK_STYLES: Record<string, string> = {
+  email: "bg-grape text-bright",
+  github: "bg-surface",
+  twitter: "bg-surface",
+};
+
+const WORK_COLORS = ["bg-acid", "bg-flamingo", "bg-neon", "bg-sun"];
+
 export default function Home() {
-  const { resolvedTheme } = useTheme();
-
   return (
-    <div className="flex flex-col gap-32 md:gap-40 pb-24 w-full">
-      
-      {/* 00: HERO */}
-      <section id="hero" className="min-h-[calc(100svh-160px)] flex flex-col justify-start relative w-full pt-2 md:pt-4 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-8 lg:gap-y-4 items-start w-full">
-          
-          {/* Rail */}
-          <div className="md:col-span-1 flex flex-col mt-2 md:mt-4">
-            <span className="font-mono text-[10px] text-zinc-400 dark:text-zinc-500 uppercase tracking-[0.2em] block">
-              [ 00 ]
-            </span>
-          </div>
+    <div className="flex flex-col w-full">
 
-          {/* Main Hero Content Area */}
-          <div className="md:col-span-11 flex flex-col w-full relative z-10 -ml-[0.04em] min-w-0">
-            
-            {/* ROW 1: Name */}
+      {/* 00: HERO — asymmetric split */}
+      <section id="hero" className="relative min-h-[78svh] flex flex-col justify-center pt-14 md:pt-20 pb-14 w-full">
+
+        {/* Scattered stickers */}
+        <div aria-hidden className="hidden lg:block absolute top-6 right-0 pointer-events-none">
+          <Sticker color="flamingo" deg={7}>100% handmade ✶</Sticker>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+
+          {/* Left: type */}
+          <div className="lg:col-span-7 flex flex-col min-w-0">
             <FadeIn>
-              <h1 className="text-[5rem] sm:text-[6rem] md:text-[7rem] lg:text-[8.5rem] xl:text-[10.5rem] font-serif leading-[0.85] tracking-tighter text-zinc-900 dark:text-zinc-100 flex flex-col break-words">
-                <span>Ansh</span>
-                <span className="pl-6 lg:pl-16 xl:pl-32 text-zinc-700 dark:text-zinc-400">Kumar.</span>
+              <span className="brutal-sm brutal-press bg-ink text-paper font-mono text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 -rotate-2 w-fit">
+                [ 00 — Hello ]
+              </span>
+
+              {/* 10vw so "KUMAR." always fits on one line — never breaks mid-word */}
+              <h1 className="mt-8 font-display uppercase leading-[0.85] tracking-tight text-[clamp(3rem,10vw,9rem)]">
+                <span className="block" style={{ textShadow: "6px 6px 0 var(--color-acid)" }}>
+                  Ansh
+                </span>
+                <span className="block whitespace-nowrap text-grape pl-[6%]" style={{ textShadow: "6px 6px 0 var(--color-ink)" }}>
+                  Kumar.
+                </span>
               </h1>
+
+              <p className="mt-8 font-serif italic text-2xl md:text-4xl leading-snug max-w-[24ch]">
+                {siteConfig.hero.subtitle}
+              </p>
             </FadeIn>
 
-            {/* ROW 2: Meta (Left) & Description (Right) */}
-            <div className="grid grid-cols-1 md:grid-cols-11 gap-x-6 gap-y-12 mt-8 md:mt-12 xl:mt-12 w-full">
-              
-              {/* Meta */}
-              <div className="md:col-span-5 lg:col-span-4 pl-2 lg:pl-16 xl:pl-32">
-                <FadeIn delay={0.1}>
-                  <div className="flex flex-col gap-6 font-mono text-[10px] text-zinc-500 uppercase tracking-widest">
-                    <div className="flex flex-col gap-1.5 border-l border-zinc-200 dark:border-zinc-800/50 pl-5">
-                      <span className="block text-zinc-400 dark:text-zinc-600">Focus</span>
-                      <span className="text-zinc-800 dark:text-zinc-300">Systems / WEB3</span>
-                    </div>
-                    <div className="flex flex-col gap-1.5 border-l border-zinc-200 dark:border-zinc-800/50 pl-5">
-                      <span className="block text-zinc-400 dark:text-zinc-600">Location</span>
-                      <span className="text-zinc-800 dark:text-zinc-300">Bengaluru, India</span>
-                    </div>
-                  </div>
-                </FadeIn>
+            <FadeIn delay={0.25}>
+              <div className="flex flex-wrap gap-4 mt-10">
+                {Object.entries(siteConfig.links).map(([name, url], i) => (
+                  <a
+                    key={name}
+                    href={url}
+                    target={url.startsWith("http") ? "_blank" : undefined}
+                    rel={url.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className={`brutal-sm brutal-press group inline-flex items-center gap-2 px-4 py-2.5 font-mono text-[11px] font-bold uppercase tracking-widest ${LINK_STYLES[name] ?? "bg-surface"} ${i % 2 === 0 ? "rotate-1" : "-rotate-1"}`}
+                  >
+                    {name === "github" && getTechIcon("github")}
+                    <span>{name}</span>
+                    <ArrowUpRight
+                      size={14}
+                      strokeWidth={2.5}
+                      className="transition-transform duration-300 group-hover:rotate-45"
+                    />
+                  </a>
+                ))}
               </div>
-
-              {/* Description & Links */}
-              <div className="md:col-span-6 lg:col-span-7 xl:col-span-6 xl:col-start-6 flex flex-col items-end text-right gap-6 min-w-0">
-                <FadeIn delay={0.2}>
-                  <p className="text-xl sm:text-2xl lg:text-3xl xl:text-[2rem] font-light text-zinc-700 dark:text-zinc-300 leading-[1.4] max-w-[28ch]">
-                    {siteConfig.hero.subtitle}
-                  </p>
-                </FadeIn>
-
-                <FadeIn delay={0.3}>
-                  <div className="flex flex-wrap justify-end gap-5 font-mono text-xs">
-                    {Object.entries(siteConfig.links).map(([name, url]) => (
-                      <a 
-                        key={name} 
-                        href={url} 
-                        target={url.startsWith("http") ? "_blank" : undefined}
-                        rel={url.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="group flex items-center gap-2.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors relative overflow-hidden"
-                      >
-                        {name === "github" && getTechIcon("github")}
-                        <span className="relative z-10">{name}</span>
-                        <ArrowUpRight size={12} className="opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300 shrink-0" />
-                      </a>
-                    ))}
-                  </div>
-                </FadeIn>
-              </div>
-
-            </div>
-
+            </FadeIn>
           </div>
 
+          {/* Right: ID badge + polaroid cluster */}
+          <div className="lg:col-span-5 flex flex-col items-center gap-6 relative">
+            <FadeIn delay={0.2} className="w-full max-w-[280px]">
+              <div className="rotate-2 brutal bg-surface p-5 flex flex-col gap-2.5 hover:rotate-1 transition-transform duration-300 w-full">
+                <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-ink/50 border-b-[3px] border-dashed border-ink/30 pb-2">
+                  ID ✶ no. 001
+                </span>
+                {[
+                  ["Name", "Ansh Kumar"],
+                  ["Role", "Builder / Engineer"],
+                  ["Base", "Bengaluru, IN"],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex items-baseline justify-between gap-3">
+                    <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-ink/50">{k}</span>
+                    <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-right">{v}</span>
+                  </div>
+                ))}
+                <div className="flex items-center gap-2 border-t-[3px] border-dashed border-ink/30 pt-2.5">
+                  <span className="live-dot" aria-hidden />
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest">
+                    Status: shipping
+                  </span>
+                </div>
+                <span className="font-mono text-[8px] uppercase tracking-widest text-ink/40 mt-1">
+                  folio v2 — maximalist edition
+                </span>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.3} className="w-fit max-w-full">
+              <div className="relative -rotate-2 brutal-sm bg-surface p-2.5 pb-8 w-fit hover:rotate-1 transition-transform duration-300">
+                <span aria-hidden className="absolute -top-3.5 left-1/2 -translate-x-1/2 -rotate-6 w-24 h-7 bg-sun/80 border border-ink/20 shadow-sm" />
+                <Sticker color="neon" deg={-6} className="absolute -left-12 top-5 z-10 hidden lg:inline-block">
+                  shipping since 2022
+                </Sticker>
+                <Image
+                  src="/Ansh.png"
+                  alt="Ansh Kumar"
+                  width={600}
+                  height={600}
+                  className="w-44 md:w-56 aspect-square object-cover border-[3px] border-ink"
+                  priority
+                />
+                <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-widest text-ink/60">
+                  ansh, probably debugging
+                </p>
+                <Sticker color="acid" deg={9} className="absolute -bottom-4 -right-7 hidden md:inline-block">
+                  pcb guy ✶
+                </Sticker>
+              </div>
+            </FadeIn>
+          </div>
         </div>
       </section>
 
-      {/* 01: ABOUT */}
-      <SectionLayout id="about" index="01" title="About">
-        <FadeIn>
-          <p className="text-lg md:text-2xl text-zinc-700 dark:text-zinc-300 leading-relaxed font-light max-w-[55ch]">
-            {siteConfig.about.text}
-          </p>
-        </FadeIn>
+      {/* Skill marquee band */}
+      <FadeIn>
+        <Marquee
+          className="-mx-6 sm:-mx-12 md:-mx-24 lg:-mx-32 xl:-mx-48"
+          items={[
+            "Rust", "Solana", "TypeScript", "PCB Design", "Next.js",
+            "Docker", "Firmware", "Open Source", "C++", "EasyEDA",
+          ]}
+        />
+      </FadeIn>
+
+      {/* 01: ABOUT — dossier + quick facts */}
+      <SectionLayout id="about" index="01" title="The Dossier" accent="bg-sun">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full items-start">
+          <FadeIn className="lg:col-span-8">
+            <div className="relative h-full">
+              <Sticker color="grape" deg={-4} className="absolute -top-4 left-6 z-10">
+                the human behind the keyboard
+              </Sticker>
+              <div className="brutal bg-sun p-6 md:p-9 h-full text-void">
+                <p className="text-xl md:text-3xl font-medium leading-relaxed max-w-[54ch]">
+                  {siteConfig.about.text}
+                </p>
+              </div>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.12} className="lg:col-span-4">
+            <div className="brutal-sm bg-surface p-5 flex flex-col gap-3 rotate-1 h-full">
+              <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-ink/50 border-b-[3px] border-dashed border-ink/30 pb-2">
+                quick facts
+              </span>
+              {[
+                ["180+", "projects shipped"],
+                ["2022", "started at Hack Club"],
+                ["web3", "solana ✶ rust ✶ anchor"],
+              ].map(([big, small]) => (
+                <div key={big} className="flex items-baseline gap-3">
+                  <span className="font-display text-2xl shrink-0 w-16">{big}</span>
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink/60 leading-tight">
+                    {small}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
       </SectionLayout>
 
-      {/* 02: SELECTED WORKS */}
-      <SectionLayout id="projects" index="02" title="Selected Works">
-        <div className="flex flex-col border-t border-zinc-200 dark:border-zinc-800/50 w-full min-w-0">
+      {/* 02: SELECTED WORKS — editorial rows */}
+      <SectionLayout id="projects" index="02" title="Selected Works" accent="bg-acid">
+        <div className="flex flex-col gap-8 w-full">
           {siteConfig.projects.map((project, i) => (
-            <FadeIn key={i} delay={i * 0.1}>
-              <a 
-                href={project.live || project.github} 
-                target="_blank" 
+            <FadeIn key={project.title} delay={(i % 2) * 0.1}>
+              <a
+                href={project.live || project.github}
+                target="_blank"
                 rel="noopener noreferrer"
-                className={`group block py-12 md:py-16 lg:py-24 border-b border-zinc-200 dark:border-zinc-800/50 transition-colors w-full min-w-0`}
+                className="group relative block brutal brutal-press bg-surface w-full"
               >
-                <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 lg:gap-8 items-start w-full min-w-0">
-                  
-                  {/* Year / Featured */}
-                  <div className="xl:col-span-2 flex xl:flex-col gap-2 font-mono text-[10px] uppercase tracking-widest text-zinc-400 xl:pt-2">
-                    <span>{String(i + 1).padStart(2, "0")} / {project.year}</span>
-                    {project.featured && <span className="text-zinc-900 dark:text-zinc-300">Featured</span>}
+                {project.featured && (
+                  <Sticker color="sun" deg={6} className="absolute -top-4 right-24 z-10">
+                    ★ Featured
+                  </Sticker>
+                )}
+
+                <div className="grid grid-cols-1 md:grid-cols-12 items-stretch">
+
+                  {/* Accent index block */}
+                  <div className={`${WORK_COLORS[i % WORK_COLORS.length]} md:col-span-3 border-b-4 md:border-b-0 md:border-r-4 border-ink px-5 py-4 md:py-6 flex md:flex-col justify-between gap-2`}>
+                    <span className="font-display uppercase leading-none text-4xl md:text-6xl text-void">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-void md:mt-auto md:text-left text-right">
+                      {project.year}
+                    </span>
                   </div>
 
                   {/* Content */}
-                  <div className={`xl:col-span-7 flex flex-col gap-4 lg:gap-6 min-w-0`}>
-                    <h3 className={`text-4xl md:text-5xl font-serif text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-500 transition-colors truncate whitespace-normal break-words`}>
+                  <div className="md:col-span-6 px-5 md:px-8 py-6 flex flex-col gap-4 min-w-0">
+                    <h3 className="font-display uppercase text-2xl md:text-4xl leading-none tracking-tight decoration-flamingo decoration-wavy decoration-[3px] underline-offset-4 group-hover:underline break-words">
                       {project.title}
                     </h3>
-                    <p className={`text-zinc-600 dark:text-zinc-400 font-light leading-relaxed max-w-[55ch] text-lg lg:text-xl`}>
+                    <p className="text-ink/80 font-medium leading-relaxed max-w-[52ch]">
                       {project.description}
                     </p>
-                  </div>
-
-                  {/* Tech */}
-                  <div className={`xl:col-span-3 flex flex-col justify-between items-start xl:items-end h-full gap-8 mt-4 xl:mt-0 min-w-0`}>
-                    <ArrowRight size={24} className="text-zinc-300 dark:text-zinc-700 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 group-hover:-rotate-45 transition-all duration-300 hidden xl:block shrink-0" />
-                    
-                    <div className="flex flex-wrap xl:flex-col gap-3 xl:items-end w-full">
+                    <div className="flex flex-wrap gap-2.5">
                       {project.tech.map((t) => (
                         <TechBadge key={t} name={t} />
                       ))}
                     </div>
                   </div>
 
+                  {/* Action cell */}
+                  <div className="md:col-span-3 border-t-4 md:border-t-0 md:border-l-4 border-ink bg-paper px-5 py-4 md:py-6 flex md:flex-col items-center md:items-end justify-between gap-3">
+                    <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink/50">
+                      {project.live ? "Visit live" : "View code"}
+                    </span>
+                    <ArrowUpRight
+                      size={34}
+                      strokeWidth={2.5}
+                      className="transition-transform duration-300 group-hover:rotate-45 shrink-0"
+                    />
+                  </div>
                 </div>
               </a>
             </FadeIn>
@@ -181,175 +294,254 @@ export default function Home() {
         </div>
       </SectionLayout>
 
-      {/* 03: EXPERIENCE */}
-      <SectionLayout id="experience" index="03" title="Experience">
-        <div className="flex flex-col border-t border-zinc-200 dark:border-zinc-800/50 w-full min-w-0">
-          {siteConfig.experience.map((exp, i) => (
-            <FadeIn key={i}>
-              <div className="group flex flex-col xl:flex-row gap-6 xl:gap-8 py-12 md:py-16 lg:py-20 border-b border-zinc-200 dark:border-zinc-800/50 last:border-0 relative min-w-0 w-full">
-                
-                {/* Period */}
-                <div className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest xl:w-40 shrink-0 xl:pt-3">
-                  {exp.period}
-                </div>
-                
-                {/* Main Content */}
-                <div className="flex flex-col xl:flex-row justify-between w-full gap-8 min-w-0">
-                  <div className="flex flex-col gap-4 max-w-[55ch] min-w-0">
-                    <div className="flex flex-col gap-2 min-w-0">
-                      <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest truncate">
-                        {exp.role}
-                      </span>
-                      <h4 className="text-3xl font-serif text-zinc-900 dark:text-zinc-100 break-words whitespace-normal">
-                        <a href={exp.url} target="_blank" rel="noopener noreferrer" className="hover:text-zinc-500 transition-colors inline-flex items-center gap-3">
-                          {exp.company} <ArrowUpRight size={14} className="opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300 shrink-0" />
-                        </a>
-                      </h4>
-                    </div>
-                    <p className="text-zinc-600 dark:text-zinc-400 font-light text-lg leading-relaxed mt-2">
-                      {exp.description}
-                    </p>
+      {/* 03: EXPERIENCE — the ticket */}
+      <SectionLayout id="experience" index="03" title="Experience" accent="bg-flamingo">
+        <div className="flex flex-col gap-8 w-full">
+          {siteConfig.experience.map((exp) => (
+            <FadeIn key={exp.company}>
+              <div className="brutal bg-surface">
+                <div className="bg-flamingo text-bright border-b-4 border-ink px-5 md:px-8 py-4 flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex flex-col gap-0.5 min-w-0">
+                    <h4 className="font-display uppercase text-2xl md:text-3xl tracking-tight leading-none">
+                      {exp.company}
+                    </h4>
+                    <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-bright/90">
+                      {exp.role}
+                    </span>
                   </div>
-                  
-                  {/* Tech stack */}
-                  <div className="flex flex-wrap xl:flex-col gap-3 xl:items-end mt-4 xl:mt-0 min-w-0">
+                  <span className="bg-ink text-paper border-[3px] border-ink px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-widest rotate-2">
+                    {exp.period}
+                  </span>
+                </div>
+
+                <div className="px-5 md:px-8 py-6 flex flex-col gap-5">
+                  <p className="text-lg md:text-xl font-medium leading-relaxed max-w-[62ch]">
+                    {exp.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2.5">
                     {exp.technologies.map((t) => (
                       <TechBadge key={t} name={t} />
                     ))}
                   </div>
                 </div>
 
+                <a
+                  href={exp.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between gap-4 border-t-4 border-ink bg-paper px-5 md:px-8 py-3 hover:bg-neon hover:text-void transition-colors"
+                >
+                  <span className="font-mono text-[11px] font-bold uppercase tracking-widest">
+                    {exp.url.replace("https://", "").replace("/", "")}
+                  </span>
+                  <ArrowUpRight
+                    size={18}
+                    strokeWidth={2.5}
+                    className="transition-transform duration-300 group-hover:rotate-45"
+                  />
+                </a>
               </div>
             </FadeIn>
           ))}
         </div>
       </SectionLayout>
 
-      {/* 04: ECOSYSTEM */}
-      <SectionLayout id="tech-stack" index="04" title="Ecosystem">
-        <FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-8 w-full min-w-0 pt-2 lg:pt-0">
-            <div className="flex flex-col gap-6 min-w-0">
-              <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest border-b border-zinc-200 dark:border-zinc-800 pb-4">
-                Languages
-              </span>
-              <div className="flex flex-col gap-4">
+      {/* 04: DASHBOARD — bento of live tiles */}
+      <SectionLayout id="dashboard" index="04" title="Dashboard" accent="bg-neon">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 gap-y-8 w-full items-start">
+
+          {/* Languages */}
+          <FadeIn className="sm:col-span-2">
+            <div className="brutal bg-surface h-full">
+              <div className="bg-neon text-void border-b-4 border-ink px-5 py-3 flex items-center justify-between">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Languages</span>
+                <span className="font-display text-2xl text-void">{siteConfig.ecosystem.languages.length}</span>
+              </div>
+              <div className="p-5 flex flex-wrap gap-2.5">
                 {siteConfig.ecosystem.languages.map((tech) => (
-                  <TechBadge key={tech} name={tech} className="w-fit" />
+                  <TechBadge key={tech} name={tech} />
                 ))}
               </div>
             </div>
+          </FadeIn>
 
-            <div className="flex flex-col gap-6 min-w-0">
-              <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest border-b border-zinc-200 dark:border-zinc-800 pb-4">
-                Architecture
-              </span>
-              <div className="flex flex-col gap-4">
+          {/* Architecture */}
+          <FadeIn>
+            <div className="brutal bg-surface h-full">
+              <div className="bg-acid text-void border-b-4 border-ink px-5 py-3 flex items-center justify-between">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Architecture</span>
+                <span className="font-display text-2xl text-void">{siteConfig.ecosystem.architecture.length}</span>
+              </div>
+              <div className="p-5 flex flex-wrap gap-2.5">
                 {siteConfig.ecosystem.architecture.map((tech) => (
-                  <TechBadge key={tech} name={tech} className="w-fit" />
+                  <TechBadge key={tech} name={tech} />
                 ))}
               </div>
             </div>
+          </FadeIn>
 
-            <div className="flex flex-col gap-6 min-w-0">
-              <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest border-b border-zinc-200 dark:border-zinc-800 pb-4">
-                Systems
-              </span>
-              <div className="flex flex-col gap-4">
+          {/* Systems */}
+          <FadeIn>
+            <div className="brutal bg-surface h-full">
+              <div className="bg-sun text-void border-b-4 border-ink px-5 py-3 flex items-center justify-between">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Systems</span>
+                <span className="font-display text-2xl text-void">{siteConfig.ecosystem.systems.length}</span>
+              </div>
+              <div className="p-5 flex flex-wrap gap-2.5">
                 {siteConfig.ecosystem.systems.map((tech) => (
-                  <TechBadge key={tech} name={tech} className="w-fit" />
+                  <TechBadge key={tech} name={tech} />
                 ))}
               </div>
             </div>
-          </div>
-        </FadeIn>
-      </SectionLayout>
+          </FadeIn>
 
-      {/* 05: ACTIVITY */}
-      <SectionLayout id="github" index="05" title="Activity">
-        <FadeIn>
-          <div className="flex flex-col gap-8 w-full min-w-0 pt-2 lg:pt-0">
-            <div className="flex flex-col gap-4 font-mono text-[10px] text-zinc-500 uppercase tracking-widest">
-              <span className="flex items-center gap-2">
-                {getTechIcon("github")} GitHub Contributions
-              </span>
-              <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" className="text-zinc-900 dark:text-zinc-300 hover:opacity-50 transition-opacity">
-                @ansh3108
-              </a>
+          {/* GitHub stats */}
+          <FadeIn className="sm:col-span-2 md:col-span-3">
+            <div className="brutal bg-surface h-full">
+              <div className="bg-flamingo text-bright border-b-4 border-ink px-5 py-3 flex items-center justify-between">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-widest">GitHub Stats</span>
+                <span className="font-display text-2xl text-bright">∑</span>
+              </div>
+              <GithubStats />
             </div>
-            
-            <div className="w-full max-w-full overflow-hidden [&_svg]:w-full [&_svg]:h-auto [&_svg]:min-w-0">
-              <GitHubCalendar 
-                username="ansh3108" 
-                colorScheme={resolvedTheme === "dark" ? "dark" : "light"}
-                fontSize={12}
-                blockSize={12}
-                blockMargin={5}
-                blockRadius={2}
-                theme={{
-                  light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
-                  dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
-                }}
-              />
-            </div>
-          </div>
-        </FadeIn>
-      </SectionLayout>
+          </FadeIn>
 
-      {/* 06: CONTACT */}
-      <section id="contact" className="scroll-mt-32 pt-24 md:pt-48 border-t border-zinc-200 dark:border-zinc-800 w-full min-w-0">
-        <FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start w-full min-w-0">
-            <div className="md:col-span-4 lg:col-span-3 flex flex-col">
-              <span className="font-mono text-[10px] text-zinc-400 dark:text-zinc-500 uppercase tracking-[0.2em]">
-                [ 06 ]
-              </span>
+          {/* Recent commits */}
+          <FadeIn>
+            <div className="brutal bg-surface h-full">
+              <div className="bg-neon text-void border-b-4 border-ink px-5 py-3 flex items-center justify-between">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Commits</span>
+                <span className="font-mono text-[10px]">&gt;_</span>
+              </div>
+              <RecentCommits />
             </div>
-            <div className="md:col-span-8 lg:col-span-9 flex flex-col gap-12 min-w-0">
-              <h2 className="text-5xl md:text-7xl lg:text-[6rem] font-serif tracking-tight leading-[1] text-zinc-900 dark:text-zinc-100 max-w-[20ch] break-words">
-                Have an interesting project, idea, or conversation?
-              </h2>
-              
-              <div className="flex flex-col gap-8 font-mono text-sm md:text-base mt-8">
-                <a 
-                  href={siteConfig.links.email} 
-                  className="group inline-flex items-center gap-6 text-zinc-900 dark:text-zinc-100 hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors w-fit"
-                >
-                  <span className="uppercase tracking-widest text-[10px] text-zinc-500 w-16">Email</span>
-                  <span className="text-xl sm:text-2xl md:text-3xl border-b border-transparent group-hover:border-current transition-colors pb-1 truncate">
-                    hello@anshk.dev
+          </FadeIn>
+
+          {/* Activity calendar — wide */}
+          <FadeIn className="sm:col-span-2 md:col-span-4">
+            <div className="relative w-full">
+              <Sticker color="acid" deg={-3} className="absolute -top-4 left-5 z-10">
+                last year on github
+              </Sticker>
+              <div className="brutal bg-surface p-5 md:p-7 w-full">
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink/60">
+                    contributions ✶ @ansh3108
                   </span>
-                  <ArrowRight size={20} className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 shrink-0" />
-                </a>
-
-                <div className="flex flex-col gap-6 mt-4">
-                  <a 
-                    href={siteConfig.links.twitter} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="group inline-flex items-center gap-6 text-zinc-900 dark:text-zinc-100 hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors w-fit"
+                  <a
+                    href={siteConfig.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="brutal-sm brutal-press group inline-flex items-center gap-2 bg-ink text-paper px-3.5 py-1.5 font-mono text-[11px] font-bold uppercase tracking-widest"
                   >
-                    <span className="uppercase tracking-widest text-[10px] text-zinc-500 w-16">Twitter</span>
-                    <span className="text-lg md:text-xl border-b border-transparent group-hover:border-current transition-colors pb-1">
-                      @anshkdev
-                    </span>
+                    open profile
+                    <ArrowUpRight size={13} strokeWidth={2.5} className="transition-transform duration-300 group-hover:rotate-45" />
                   </a>
-                  <a 
-                    href={siteConfig.links.github} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="group inline-flex items-center gap-6 text-zinc-900 dark:text-zinc-100 hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors w-fit"
-                  >
-                    <span className="uppercase tracking-widest text-[10px] text-zinc-500 w-16">GitHub</span>
-                    <span className="text-lg md:text-xl border-b border-transparent group-hover:border-current transition-colors pb-1">
-                      github.com/ansh3108
-                    </span>
-                  </a>
+                </div>
+                {/* Vector trick: the calendar's own SVG stretches to 100% width,
+                    so the whole year is always visible — no horizontal scroll. */}
+                <div className="w-full [&_svg]:w-full [&_svg]:h-auto [&_svg]:min-w-0">
+                  <GitHubCalendar
+                    username="ansh3108"
+                    colorScheme="light"
+                    fontSize={12}
+                    blockRadius={1}
+                    showColorLegend={false}
+                    showTotalCount={false}
+                    theme={{
+                      light: ["#C9BFA8", "#C5F06E", "#93E03A", "#4FCB2F", "#1F7A33"],
+                      dark: ["#C9BFA8", "#C5F06E", "#93E03A", "#4FCB2F", "#1F7A33"],
+                    }}
+                  />
                 </div>
               </div>
             </div>
-          </div>
+          </FadeIn>
+        </div>
+      </SectionLayout>
+
+      {/* 05: CONTACT — split CTA + map */}
+      <section id="contact" className="scroll-mt-28 pt-28 md:pt-36 mt-10 w-full">
+        <FadeIn>
+          <span className="brutal-sm brutal-press bg-ink text-paper font-mono text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 -rotate-2 w-fit">
+            [ 05 ]
+          </span>
         </FadeIn>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mt-10 w-full">
+
+          {/* CTA card */}
+          <FadeIn className="min-w-0">
+            <div className="relative h-full brutal bg-grape p-6 md:p-10">
+              <Sticker color="sun" deg={-3} className="absolute -top-5 left-6 z-10">
+                open to weird ideas
+              </Sticker>
+              <Sticker color="acid" deg={8} className="absolute -top-4 right-6 z-10 hidden md:inline-block">
+                replies fast ✶
+              </Sticker>
+
+              <h2 className="font-display uppercase text-bright leading-[0.9] tracking-tight text-4xl md:text-5xl xl:text-6xl">
+                Got an idea?
+                <span className="block text-sun" style={{ textShadow: "5px 5px 0 var(--color-void)" }}>
+                  Let&apos;s build it.
+                </span>
+              </h2>
+
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <a
+                  href={siteConfig.links.email}
+                  className="brutal-sm brutal-press inline-flex items-center gap-3 bg-sun text-void px-6 py-4 font-mono font-bold text-lg md:text-2xl tracking-tight"
+                >
+                  hello@anshk.tech
+                  <ArrowUpRight size={20} strokeWidth={3} />
+                </a>
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                  href={siteConfig.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="brutal-sm brutal-press bg-surface text-ink px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-widest"
+                >
+                  github.com/ansh3108
+                </a>
+                <a
+                  href={siteConfig.links.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="brutal-sm brutal-press bg-surface text-ink px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-widest"
+                >
+                  @anshkdev
+                </a>
+              </div>
+
+              <p className="mt-8 font-mono text-[10px] uppercase tracking-widest text-bright/80">
+                Usually replies within 24h ✶ Bengaluru, India
+              </p>
+            </div>
+          </FadeIn>
+
+          {/* Map tile — hand-drawn "city as PCB", no tiles, no attribution */}
+          <FadeIn delay={0.12} className="min-w-0">
+            <div className="relative h-full min-h-[360px] lg:min-h-full brutal-sm bg-surface">
+              <Sticker color="neon" deg={-2} className="absolute -top-6 left-5 z-10">
+                bengaluru hq
+              </Sticker>
+              <div className="absolute inset-0 flex items-center justify-center p-4 pt-9 pb-11">
+                <BengaluruMap />
+              </div>
+              <div className="absolute inset-x-0 bottom-0 z-10 border-t-4 border-ink bg-surface px-3 py-1.5 flex items-center justify-between gap-3">
+                <span className="font-mono text-[9px] font-bold uppercase tracking-widest truncate">
+                  12.9716° N ✶ 77.5946° E
+                </span>
+                <span className="font-mono text-[9px] tracking-wider text-ink/50 shrink-0">
+                  hand-drawn ✶ no tiles
+                </span>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
       </section>
     </div>
   );
