@@ -34,11 +34,26 @@ export function getTechIcon(name: string) {
   }
 }
 
+const ACCENTS = [
+  "bg-grape text-bright",
+  "bg-acid text-void",
+  "bg-flamingo text-bright",
+  "bg-neon text-void",
+  "bg-sun text-void",
+];
+
 export function TechBadge({ name, className = "" }: { name: string, className?: string }) {
   const icon = getTechIcon(name);
+  const hash = [...name].reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  const accent = ACCENTS[hash % ACCENTS.length];
+  const deg = [0, -1, 1, -2, 2][hash % 5];
+
   return (
-    <span className={`inline-flex items-center gap-2.5 font-mono text-xs text-zinc-700 dark:text-zinc-300 uppercase tracking-widest ${className}`}>
-      {icon && <span className="opacity-100 drop-shadow-sm">{icon}</span>}
+    <span
+      style={{ transform: `rotate(${deg}deg)` }}
+      className={`inline-flex w-fit items-center gap-1.5 border-[3px] border-ink px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-widest shadow-[3px_3px_0_0_var(--color-ink)] transition-transform hover:-translate-y-0.5 ${accent} ${className}`}
+    >
+      {icon && <span className="shrink-0">{icon}</span>}
       <span>{name}</span>
     </span>
   );

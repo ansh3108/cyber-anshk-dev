@@ -9,50 +9,48 @@ export function KbdNotification() {
   const [isMac, setIsMac] = useState(false);
 
   useEffect(() => {
-    // Check if mac for cmd key
-    setIsMac(typeof window !== "undefined" && navigator.userAgent.includes("Mac"));
-    
-    // Check if they've dismissed it in the past (optional, but good UX)
     const hasSeen = localStorage.getItem("has-seen-kbd");
-    if (!hasSeen) {
-      // Show after a short delay
-      const timer = setTimeout(() => {
-        setIsVisible(true);
-      }, 1500);
+    if (hasSeen) return;
 
-      // Hide after 6 seconds
-      const hideTimer = setTimeout(() => {
-        setIsVisible(false);
-        localStorage.setItem("has-seen-kbd", "true");
-      }, 7500);
+    // Show after a short delay (also detect platform inside the callback
+    // rather than synchronously in the effect body)
+    const timer = setTimeout(() => {
+      setIsMac(navigator.userAgent.includes("Mac"));
+      setIsVisible(true);
+    }, 1500);
 
-      return () => {
-        clearTimeout(timer);
-        clearTimeout(hideTimer);
-      };
-    }
+    // Hide after a few seconds
+    const hideTimer = setTimeout(() => {
+      setIsVisible(false);
+      localStorage.setItem("has-seen-kbd", "true");
+    }, 7500);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(hideTimer);
+    };
   }, []);
 
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -20, rotate: 4 }}
+          animate={{ opacity: 1, y: 0, rotate: 1 }}
           exit={{ opacity: 0, y: -10, scale: 0.95 }}
-          className="fixed top-8 right-8 md:top-12 md:right-12 z-50 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl rounded-full px-4 py-2.5 flex items-center gap-3 font-mono text-xs text-zinc-600 dark:text-zinc-400 pointer-events-none"
+          className="print:hidden fixed top-20 right-6 md:right-10 z-50 bg-surface border-4 border-ink shadow-[6px_6px_0_0_var(--color-ink)] rounded-none px-4 py-3 flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-wider text-ink pointer-events-none"
         >
-          <Command size={14} className="text-zinc-900 dark:text-zinc-100" />
+          <Command size={15} className="text-grape" strokeWidth={2.5} />
           <span>Press</span>
-          <div className="flex gap-1 items-center font-sans text-[10px] font-semibold text-zinc-900 dark:text-zinc-100">
-            <kbd className="min-w-[20px] h-5 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 rounded border border-zinc-200 dark:border-zinc-700">
+          <div className="flex gap-1.5 items-center">
+            <kbd className="min-w-[22px] h-6 flex items-center justify-center bg-sun border-[3px] border-ink text-[11px]">
               {isMac ? "⌘" : "Ctrl"}
             </kbd>
-            <kbd className="min-w-[20px] h-5 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 rounded border border-zinc-200 dark:border-zinc-700">
+            <kbd className="min-w-[22px] h-6 flex items-center justify-center bg-sun border-[3px] border-ink text-[11px]">
               K
             </kbd>
           </div>
-          <span>to open menu</span>
+          <span>for shortcuts</span>
         </motion.div>
       )}
     </AnimatePresence>

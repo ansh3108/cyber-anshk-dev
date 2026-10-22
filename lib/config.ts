@@ -1,12 +1,12 @@
 export const siteConfig = {
   name: "Ansh Kumar",
-  username: "anshk.dev",
+  username: "anshk.tech",
   description: "Full-stack builder, hardware hacker, engineer. I make CLI tools, craft hardware from circuit boards to microcontrollers, and am passionate about Web3.",
-  url: "https://anshk.dev",
+  url: "https://anshk.tech",
   links: {
     github: "https://github.com/ansh3108",
     twitter: "https://x.com/anshkdev",
-    email: "mailto:hello@anshk.dev",
+    email: "mailto:hello@anshk.tech",
   },
   hero: {
     title: "Hi, I'm Ansh Kumar.",

@@ -9,7 +9,7 @@ interface MarqueeProps {
 
 export function Marquee({
   items,
-  speed = 30,
+  speed = 28,
   reverse = false,
   className = "",
 }: MarqueeProps) {
@@ -17,23 +17,11 @@ export function Marquee({
 
   return (
     <div
-      className={`overflow-hidden whitespace-nowrap ${className}`}
-      style={{
-        maskImage:
-          "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-        WebkitMaskImage:
-          "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-      }}
+      aria-hidden
+      className={`overflow-hidden border-y-4 border-ink bg-grape py-2.5 ${className}`}
     >
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
-
       <div
-        className="inline-flex items-center hover:[animation-play-state:paused]"
+        className="flex w-max whitespace-nowrap"
         style={{
           animation: `marquee ${speed}s linear infinite`,
           animationDirection: direction,
@@ -41,20 +29,11 @@ export function Marquee({
       >
         {[0, 1].map((copy) =>
           items.map((item, i) => (
-            <span key={`${copy}-${i}`} className="inline-flex items-center">
-              <span
-                className="text-7xl md:text-9xl font-black uppercase tracking-tighter px-4 shrink-0"
-                style={{
-                  WebkitTextStroke: "1px rgba(255,255,255,0.15)",
-                  WebkitTextFillColor: "transparent",
-                  color: "transparent",
-                }}
-              >
+            <span key={`${copy}-${i}`} className="flex items-center">
+              <span className="font-display uppercase text-3xl md:text-4xl text-bright px-5 tracking-tight">
                 {item}
               </span>
-              <span className="text-2xl text-white/10 px-4 shrink-0 select-none">
-                ◆
-              </span>
+              <span className="font-mono text-2xl text-sun select-none">✶</span>
             </span>
           ))
         )}
