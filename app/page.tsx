@@ -76,10 +76,7 @@ export default function Home() {
       {/* 00: HERO — asymmetric split */}
       <section id="hero" className="relative min-h-[78svh] flex flex-col justify-center pt-14 md:pt-20 pb-14 w-full">
 
-        {/* Scattered stickers */}
-        <div aria-hidden className="hidden lg:block absolute top-6 right-0 pointer-events-none">
-          <Sticker color="flamingo" deg={7}>100% handmade ✶</Sticker>
-        </div>
+        
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
 
@@ -133,12 +130,11 @@ export default function Home() {
             <FadeIn delay={0.2} className="w-full max-w-[280px]">
               <div className="rotate-2 brutal bg-surface p-5 flex flex-col gap-2.5 hover:rotate-1 transition-transform duration-300 w-full">
                 <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-ink/50 border-b-[3px] border-dashed border-ink/30 pb-2">
-                  ID ✶ no. 001
                 </span>
                 {[
                   ["Name", "Ansh Kumar"],
                   ["Role", "Builder / Engineer"],
-                  ["Base", "Bengaluru, IN"],
+                  ["Where", "Bengaluru, IN"],
                 ].map(([k, v]) => (
                   <div key={k} className="flex items-baseline justify-between gap-3">
                     <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-ink/50">{k}</span>
@@ -146,13 +142,10 @@ export default function Home() {
                   </div>
                 ))}
                 <div className="flex items-center gap-2 border-t-[3px] border-dashed border-ink/30 pt-2.5">
-                  <span className="live-dot" aria-hidden />
                   <span className="font-mono text-[10px] font-bold uppercase tracking-widest">
-                    Status: shipping
                   </span>
                 </div>
                 <span className="font-mono text-[8px] uppercase tracking-widest text-ink/40 mt-1">
-                  folio v2 — maximalist edition
                 </span>
               </div>
             </FadeIn>
@@ -492,7 +485,7 @@ export default function Home() {
                   href={siteConfig.links.email}
                   className="brutal-sm brutal-press inline-flex items-center gap-3 bg-sun text-void px-6 py-4 font-mono font-bold text-lg md:text-2xl tracking-tight"
                 >
-                  hello@anshk.tech
+                  itz.anshkumar@gmail.com
                   <ArrowUpRight size={20} strokeWidth={3} />
                 </a>
               </div>
@@ -526,17 +519,16 @@ export default function Home() {
           <FadeIn delay={0.12} className="min-w-0">
             <div className="relative h-full min-h-[360px] lg:min-h-full brutal-sm bg-surface">
               <Sticker color="neon" deg={-2} className="absolute -top-6 left-5 z-10">
-                bengaluru hq
+                bengaluru
               </Sticker>
               <div className="absolute inset-0 flex items-center justify-center p-4 pt-9 pb-11">
                 <BengaluruMap />
               </div>
               <div className="absolute inset-x-0 bottom-0 z-10 border-t-4 border-ink bg-surface px-3 py-1.5 flex items-center justify-between gap-3">
                 <span className="font-mono text-[9px] font-bold uppercase tracking-widest truncate">
-                  12.9716° N ✶ 77.5946° E
                 </span>
                 <span className="font-mono text-[9px] tracking-wider text-ink/50 shrink-0">
-                  hand-drawn ✶ no tiles
+                  ✶ no tiles
                 </span>
               </div>
             </div>

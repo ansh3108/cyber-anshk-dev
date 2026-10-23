@@ -6,7 +6,7 @@ export const siteConfig = {
   links: {
     github: "https://github.com/ansh3108",
     twitter: "https://x.com/anshkdev",
-    email: "mailto:hello@anshk.tech",
+    email: "mailto:itz.anshkumar@gmail.com",
   },
   hero: {
     title: "Hi, I'm Ansh Kumar.",

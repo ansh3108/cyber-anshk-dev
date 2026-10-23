@@ -304,7 +304,7 @@ export function BengaluruMap() {
           textAnchor="middle"
           className={LABEL}
         >
-          ✶ HQ — BLR
+          ✶ BLR
         </text>
         <text x="296" y="134" fontSize="9" fontWeight="650" letterSpacing="1" className={LABEL}>
           MG ROAD

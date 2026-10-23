@@ -41,7 +41,7 @@ export default function Resume() {
             Full-Stack Builder & Hardware Engineer ✶ Bengaluru, India
           </p>
           <div className="hidden print:flex print:flex-wrap print:gap-4 print:text-xs print:mt-2 print:text-gray-600">
-            <span>hello@anshk.tech</span>
+            <span>itz.anshkumar@gmail.com</span>
             <span>linkedin.com/in/ansh-kumar-tech/</span>
             <span>github.com/ansh3108</span>
           </div>
@@ -162,7 +162,7 @@ export default function Resume() {
               href={siteConfig.links.email}
               className="brutal-sm brutal-press bg-sun text-void px-5 py-3 font-mono text-sm font-bold uppercase tracking-widest"
             >
-              hello@anshk.tech
+              itz.anshkumar@gmail.com
             </a>
             <a
               href={siteConfig.links.github}
