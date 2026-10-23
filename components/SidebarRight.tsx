@@ -9,7 +9,7 @@ export function SidebarRight() {
   
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigator.clipboard.writeText("hello@anshk.tech");
+    navigator.clipboard.writeText("itz.anshkumar@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
