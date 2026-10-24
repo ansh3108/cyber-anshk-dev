@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-23T13:42:15.498Z",
+  "updatedAt": "2026-10-24T15:16:43.486Z",
   "profile": {
     "name": "Ansh Kumar",
     "login": "ansh3108",
@@ -12,7 +12,7 @@
     "stars": 27,
     "forks": 4,
     "publicRepos": 244,
-    "totalContributions": 1032
+    "totalContributions": 1037
   },
   "languages": [
     {
@@ -69,6 +69,30 @@
   "commits": [
     {
       "repo": "cyber-anshk-dev",
+      "message": "Merge pull request #42 from ansh3108/dependabot/npm_and_yarn/proxy-addr-2.0.8",
+      "date": "2026-10-24T12:28:52.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/f898100493d4fa99b461db4bc33c64eca4af3d14"
+    },
+    {
+      "repo": "cyber-anshk-dev",
+      "message": "Merge pull request #41 from ansh3108/dependabot/npm_and_yarn/next-16.4.1",
+      "date": "2026-10-24T12:26:36.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/34c85e7e290f65e6a42243fbaa6e88014e372037"
+    },
+    {
+      "repo": "cyber-anshk-dev",
+      "message": "Merge pull request #40 from ansh3108/master",
+      "date": "2026-10-24T12:12:28.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/4f57f0b7421f02e5f389e78bfb36ab3e488aab4d"
+    },
+    {
+      "repo": "cyber-anshk-dev",
+      "message": "add caching for github stats",
+      "date": "2026-10-24T12:09:41.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/9742c467d5d5c17a949b7268d80c18d6b4281c27"
+    },
+    {
+      "repo": "cyber-anshk-dev",
       "message": "Merge pull request #39 from ansh3108/master",
       "date": "2026-10-23T18:17:45.000+05:30",
       "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/4295196a89e0edbefbbe924d262c90d142bb89de"
@@ -90,30 +114,6 @@
       "message": "complete revamp",
       "date": "2026-10-22T12:54:19.000+05:30",
       "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/3c6319934dea89ded62833b79a913ce0a27ae02c"
-    },
-    {
-      "repo": "Solana-Block-Monitor",
-      "message": "Merge pull request #9 from ansh3108/master",
-      "date": "2026-10-21T12:16:50.000+05:30",
-      "url": "https://github.com/ansh3108/Solana-Block-Monitor/commit/733d4b3788910634f0ce50af1ff333338c511626"
-    },
-    {
-      "repo": "Solana-Block-Monitor",
-      "message": "fix key-press and key-release bug",
-      "date": "2026-10-21T12:16:13.000+05:30",
-      "url": "https://github.com/ansh3108/Solana-Block-Monitor/commit/dfe58b40272c547ab9d7747fe766859da1fe8382"
-    },
-    {
-      "repo": "Solana-Block-Monitor",
-      "message": "Merge pull request #8 from ansh3108/master",
-      "date": "2026-10-21T10:52:31.000+05:30",
-      "url": "https://github.com/ansh3108/Solana-Block-Monitor/commit/d6eb73c5c642aafbddc14359e30aeddef65a5f7d"
-    },
-    {
-      "repo": "Solana-Block-Monitor",
-      "message": "add interactive pda explorer",
-      "date": "2026-10-21T10:51:52.000+05:30",
-      "url": "https://github.com/ansh3108/Solana-Block-Monitor/commit/bade82664e27fe996ce99d4021a4dd186e8c6beb"
     }
   ],
   "contributions": [
@@ -1966,6 +1966,11 @@
       "date": "2026-10-23",
       "count": 3,
       "level": 1
+    },
+    {
+      "date": "2026-10-24",
+      "count": 5,
+      "level": 2
     }
   ]
 }
