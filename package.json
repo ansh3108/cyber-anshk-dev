@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync:github": "node scripts/update-github-data.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
