@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Sticker } from "@/components/Sticker";
+import githubData from "@/lib/data/github-data.json";
 
 type Stats = {
   stars: number;
@@ -12,22 +13,11 @@ type Stats = {
 const BAR_COLORS = ["bg-acid", "bg-neon", "bg-sun", "bg-flamingo", "bg-grape"];
 
 export function GithubStats() {
-  const [stats, setStats] = useState<Stats | null>(null);
-
-  useEffect(() => {
-    let alive = true;
-    fetch("/api/github")
-      .then((res) => (res.ok ? res.json() : null))
-      .then((json: Stats | null) => {
-        if (alive && json && json.languages?.length) setStats(json);
-      })
-      .catch(() => {
-        // offline is fine — tile just stays a skeleton
-      });
-    return () => {
-      alive = false;
-    };
-  }, []);
+  const [stats] = useState<Stats>({
+    stars: githubData.stats.stars,
+    forks: githubData.stats.forks,
+    languages: githubData.languages,
+  });
 
   if (!stats) {
     return (

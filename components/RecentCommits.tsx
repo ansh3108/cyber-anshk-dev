@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import githubData from "@/lib/data/github-data.json";
 
 type Commit = {
   repo: string;
@@ -19,22 +20,7 @@ function timeAgo(iso: string): string {
 }
 
 export function RecentCommits() {
-  const [commits, setCommits] = useState<Commit[] | null>(null);
-
-  useEffect(() => {
-    let alive = true;
-    fetch("/api/github")
-      .then((res) => (res.ok ? res.json() : null))
-      .then((json) => {
-        if (alive && json?.commits?.length) setCommits(json.commits);
-      })
-      .catch(() => {
-        // offline is fine — tile just stays a skeleton
-      });
-    return () => {
-      alive = false;
-    };
-  }, []);
+  const [commits] = useState<Commit[]>(githubData.commits);
 
   if (!commits) {
     return (

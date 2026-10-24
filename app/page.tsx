@@ -5,7 +5,8 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { siteConfig } from "@/lib/config";
 import { ArrowUpRight } from "lucide-react";
-import { GitHubCalendar } from "react-github-calendar";
+import { ActivityCalendar } from "react-activity-calendar";
+import githubData from "@/lib/data/github-data.json";
 import { TechBadge, getTechIcon } from "@/components/tech-icon";
 import { Sticker } from "@/components/Sticker";
 import { Marquee } from "@/components/Marquee";
@@ -419,7 +420,7 @@ export default function Home() {
               <div className="brutal bg-surface p-5 md:p-7 w-full">
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
                   <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink/60">
-                    contributions ✶ @ansh3108
+                    {githubData.stats.totalContributions} contributions in the last year ✶ @ansh3108
                   </span>
                   <a
                     href={siteConfig.links.github}
@@ -434,8 +435,8 @@ export default function Home() {
                 {/* Vector trick: the calendar's own SVG stretches to 100% width,
                     so the whole year is always visible — no horizontal scroll. */}
                 <div className="w-full [&_svg]:w-full [&_svg]:h-auto [&_svg]:min-w-0">
-                  <GitHubCalendar
-                    username="ansh3108"
+                  <ActivityCalendar
+                    data={githubData.contributions}
                     colorScheme="light"
                     fontSize={12}
                     blockRadius={1}
