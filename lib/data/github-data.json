@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T02:52:20.740Z",
+  "updatedAt": "2026-10-25T15:26:37.912Z",
   "profile": {
     "name": "Ansh Kumar",
     "login": "ansh3108",
@@ -12,7 +12,7 @@
     "stars": 27,
     "forks": 4,
     "publicRepos": 244,
-    "totalContributions": 1037
+    "totalContributions": 1043
   },
   "languages": [
     {
@@ -68,6 +68,36 @@
   ],
   "commits": [
     {
+      "repo": "voxel-engine",
+      "message": "Merge pull request #18 from ansh3108/main",
+      "date": "2026-10-25T15:42:45.000+05:30",
+      "url": "https://github.com/ansh3108/voxel-engine/commit/e4dbcea830e4b246592825ce5178b699edc2043b"
+    },
+    {
+      "repo": "cyber-anshk-dev",
+      "message": "Merge pull request #46 from ansh3108/dependabot/npm_and_yarn/multi-e24c646944",
+      "date": "2026-10-25T12:38:24.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/6b9e93fad9b6ebcc78d915f97205bbb4fcbedd77"
+    },
+    {
+      "repo": "cyber-anshk-dev",
+      "message": "Merge pull request #45 from ansh3108/dependabot/npm_and_yarn/browserslist-4.29.4",
+      "date": "2026-10-25T12:33:19.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/08cedfce8c89bfb311e701ca4f09a50efc7872ec"
+    },
+    {
+      "repo": "cyber-anshk-dev",
+      "message": "Merge pull request #44 from ansh3108/dependabot/npm_and_yarn/modelcontextprotocol/sdk-1.32.2",
+      "date": "2026-10-25T12:31:49.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/3114acfd48e3d5b6a00042f4551e7e0488036721"
+    },
+    {
+      "repo": "cyber-anshk-dev",
+      "message": "Merge pull request #43 from ansh3108/dependabot/npm_and_yarn/source-map-js-1.2.2",
+      "date": "2026-10-25T12:30:28.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/7a94152af853bfed15e201500b67177a035a0bc8"
+    },
+    {
       "repo": "cyber-anshk-dev",
       "message": "Merge pull request #42 from ansh3108/dependabot/npm_and_yarn/proxy-addr-2.0.8",
       "date": "2026-10-24T12:28:52.000+05:30",
@@ -84,36 +114,6 @@
       "message": "Merge pull request #40 from ansh3108/master",
       "date": "2026-10-24T12:12:28.000+05:30",
       "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/4f57f0b7421f02e5f389e78bfb36ab3e488aab4d"
-    },
-    {
-      "repo": "cyber-anshk-dev",
-      "message": "add caching for github stats",
-      "date": "2026-10-24T12:09:41.000+05:30",
-      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/9742c467d5d5c17a949b7268d80c18d6b4281c27"
-    },
-    {
-      "repo": "cyber-anshk-dev",
-      "message": "Merge pull request #39 from ansh3108/master",
-      "date": "2026-10-23T18:17:45.000+05:30",
-      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/4295196a89e0edbefbbe924d262c90d142bb89de"
-    },
-    {
-      "repo": "cyber-anshk-dev",
-      "message": "fix typos and update contacts",
-      "date": "2026-10-23T18:13:36.000+05:30",
-      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/7e7b4b68888177cd137e385c200b3c5ee0f5888a"
-    },
-    {
-      "repo": "cyber-anshk-dev",
-      "message": "Merge pull request #38 from ansh3108/master",
-      "date": "2026-10-22T12:57:36.000+05:30",
-      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/71176e1c4c5efed2a589482af51f4eb763586233"
-    },
-    {
-      "repo": "cyber-anshk-dev",
-      "message": "complete revamp",
-      "date": "2026-10-22T12:54:19.000+05:30",
-      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/3c6319934dea89ded62833b79a913ce0a27ae02c"
     }
   ],
   "contributions": [
@@ -1754,7 +1754,7 @@
     },
     {
       "date": "2026-09-18",
-      "count": 1,
+      "count": 2,
       "level": 1
     },
     {
@@ -1939,8 +1939,8 @@
     },
     {
       "date": "2026-10-25",
-      "count": 0,
-      "level": 0
+      "count": 5,
+      "level": 2
     }
   ]
 }
