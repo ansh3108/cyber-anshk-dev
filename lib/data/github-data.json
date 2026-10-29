@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-10-29T04:00:27.727Z",
+  "updatedAt": "2026-10-29T17:55:45.277Z",
   "profile": {
     "name": "Ansh Kumar",
     "login": "ansh3108",
     "avatar_url": "https://avatars.githubusercontent.com/u/115077985?v=4",
-    "public_repos": 244,
+    "public_repos": 245,
     "bio": "Solana & AI",
     "location": "Bengaluru, India"
   },
   "stats": {
     "stars": 27,
     "forks": 4,
-    "publicRepos": 244,
-    "totalContributions": 1041
+    "publicRepos": 245,
+    "totalContributions": 1044
   },
   "languages": [
     {
@@ -68,34 +68,52 @@
   ],
   "commits": [
     {
+      "repo": "dev-workspace-cli",
+      "message": "build: add eslint to npm run check (#57)",
+      "date": "2026-10-29T22:13:51.000+05:30",
+      "url": "https://github.com/modulane/dev-workspace-cli/commit/eaee6b7b341351e223cfa6602cead29e39371200"
+    },
+    {
       "repo": "cyber-anshk-dev",
-      "message": "Pushed updates to cyber-anshk-dev",
-      "date": "2026-10-26T07:19:55Z",
-      "url": "https://github.com/ansh3108/cyber-anshk-dev"
+      "message": "Merge pull request #49 from ansh3108/dependabot/npm_and_yarn/fflate-0.6.11",
+      "date": "2026-10-26T12:50:14.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/802908c58c31be93925efb3f90b939a9ab216117"
+    },
+    {
+      "repo": "cyber-anshk-dev",
+      "message": "Merge pull request #48 from ansh3108/dependabot/npm_and_yarn/multi-05c505ab13",
+      "date": "2026-10-26T12:50:05.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/02e1310803a52f8bc7c42fa88b7cc9cdc15e2055"
+    },
+    {
+      "repo": "cyber-anshk-dev",
+      "message": "Merge pull request #47 from ansh3108/dependabot/npm_and_yarn/js-yaml-4.3.2",
+      "date": "2026-10-26T12:49:53.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/ba10a4f10bf86d7ab1c297ba4af1f552f37956a0"
     },
     {
       "repo": "voxel-engine",
-      "message": "Pushed updates to voxel-engine",
-      "date": "2026-10-25T10:12:47Z",
-      "url": "https://github.com/ansh3108/voxel-engine"
+      "message": "Merge pull request #18 from ansh3108/main",
+      "date": "2026-10-25T15:42:45.000+05:30",
+      "url": "https://github.com/ansh3108/voxel-engine/commit/e4dbcea830e4b246592825ce5178b699edc2043b"
     },
     {
       "repo": "cyber-anshk-dev",
-      "message": "Pushed updates to cyber-anshk-dev",
-      "date": "2026-10-26T07:20:06Z",
-      "url": "https://github.com/ansh3108/cyber-anshk-dev"
+      "message": "Merge pull request #46 from ansh3108/dependabot/npm_and_yarn/multi-e24c646944",
+      "date": "2026-10-25T12:38:24.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/6b9e93fad9b6ebcc78d915f97205bbb4fcbedd77"
     },
     {
       "repo": "cyber-anshk-dev",
-      "message": "Pushed updates to cyber-anshk-dev",
-      "date": "2026-10-26T07:20:16Z",
-      "url": "https://github.com/ansh3108/cyber-anshk-dev"
+      "message": "Merge pull request #45 from ansh3108/dependabot/npm_and_yarn/browserslist-4.29.4",
+      "date": "2026-10-25T12:33:19.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/08cedfce8c89bfb311e701ca4f09a50efc7872ec"
     },
     {
       "repo": "cyber-anshk-dev",
-      "message": "Pushed updates to cyber-anshk-dev",
-      "date": "2026-10-25T07:03:21Z",
-      "url": "https://github.com/ansh3108/cyber-anshk-dev"
+      "message": "Merge pull request #44 from ansh3108/dependabot/npm_and_yarn/modelcontextprotocol/sdk-1.32.2",
+      "date": "2026-10-25T12:31:49.000+05:30",
+      "url": "https://github.com/ansh3108/cyber-anshk-dev/commit/3114acfd48e3d5b6a00042f4551e7e0488036721"
     }
   ],
   "contributions": [
@@ -1941,8 +1959,8 @@
     },
     {
       "date": "2026-10-29",
-      "count": 0,
-      "level": 0
+      "count": 3,
+      "level": 1
     }
   ]
 }
