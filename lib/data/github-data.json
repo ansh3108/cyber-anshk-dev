@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T04:39:37.484Z",
+  "updatedAt": "2026-11-14T17:36:32.938Z",
   "profile": {
     "name": "Ansh Kumar",
     "login": "ansh3108",
@@ -12,7 +12,7 @@
     "stars": 25,
     "forks": 4,
     "publicRepos": 247,
-    "totalContributions": 1055
+    "totalContributions": 1058
   },
   "languages": [
     {
@@ -69,6 +69,18 @@
   "commits": [
     {
       "repo": "Momentum",
+      "message": "Merge pull request #8 from ansh3108/master",
+      "date": "2026-11-14T10:32:09.000+05:30",
+      "url": "https://github.com/ansh3108/Momentum/commit/a6a98665080a2bd4c75641914b4c8cf9a6b3ecaf"
+    },
+    {
+      "repo": "Momentum",
+      "message": "refactor: change the viewmodel tactics to work only when the height is greater than 1 block",
+      "date": "2026-11-14T10:31:14.000+05:30",
+      "url": "https://github.com/ansh3108/Momentum/commit/f0b24bde30e22fb06ab7b310d492aba81c0c96df"
+    },
+    {
+      "repo": "Momentum",
       "message": "Merge pull request #7 from ansh3108/master",
       "date": "2026-11-12T18:39:20.000+05:30",
       "url": "https://github.com/ansh3108/Momentum/commit/11fff09850601f80644c144624957e9c8c54f909"
@@ -102,18 +114,6 @@
       "message": "feat: crosshair",
       "date": "2026-11-09T11:16:33.000+05:30",
       "url": "https://github.com/ansh3108/Momentum/commit/c8fb2c0dc5260892ac6a74d744363e91b7ce61e1"
-    },
-    {
-      "repo": "User-Profiles",
-      "message": "chore: init",
-      "date": "2026-11-07T16:20:22.000+05:30",
-      "url": "https://github.com/ansh3108/User-Profiles/commit/fb3851cae7eda43550318850f857cd419f5d69bb"
-    },
-    {
-      "repo": "Momentum",
-      "message": "Merge pull request #4 from ansh3108/master",
-      "date": "2026-11-05T20:18:09.000+05:30",
-      "url": "https://github.com/ansh3108/Momentum/commit/065971f5afa095eca7361ceb76ead2f634d1ce68"
     }
   ],
   "contributions": [
@@ -1969,8 +1969,8 @@
     },
     {
       "date": "2026-11-14",
-      "count": 0,
-      "level": 0
+      "count": 3,
+      "level": 1
     }
   ]
 }
