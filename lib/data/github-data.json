@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T05:26:34.703Z",
+  "updatedAt": "2026-11-20T19:33:12.866Z",
   "profile": {
     "name": "Ansh Kumar",
     "login": "ansh3108",
@@ -12,7 +12,7 @@
     "stars": 25,
     "forks": 4,
     "publicRepos": 247,
-    "totalContributions": 1067
+    "totalContributions": 1076
   },
   "languages": [
     {
@@ -69,6 +69,42 @@
   "commits": [
     {
       "repo": "Momentum",
+      "message": "Merge pull request #13 from ansh3108/ansh3108-patch-2",
+      "date": "2026-11-20T20:04:02.000+05:30",
+      "url": "https://github.com/ansh3108/Momentum/commit/f7953cd250c53778fa3f89a185fb6d38f4a92508"
+    },
+    {
+      "repo": "Momentum",
+      "message": "Update README.md",
+      "date": "2026-11-20T20:03:36.000+05:30",
+      "url": "https://github.com/ansh3108/Momentum/commit/92b976b8d92d7fcce4825ec6d31baf5cb394c256"
+    },
+    {
+      "repo": "Momentum",
+      "message": "Merge pull request #12 from ansh3108/ansh3108-patch-1",
+      "date": "2026-11-20T19:45:33.000+05:30",
+      "url": "https://github.com/ansh3108/Momentum/commit/0c4272cfa502d4cf79b0b6799a9becb883712c3f"
+    },
+    {
+      "repo": "Momentum",
+      "message": "Update README.md",
+      "date": "2026-11-20T19:45:06.000+05:30",
+      "url": "https://github.com/ansh3108/Momentum/commit/69b0eba154d184ad7a62bcc2922b518e0237c5b6"
+    },
+    {
+      "repo": "Momentum",
+      "message": "Merge pull request #11 from ansh3108/master",
+      "date": "2026-11-20T17:09:42.000+05:30",
+      "url": "https://github.com/ansh3108/Momentum/commit/629b3117e01c13140163e263f06cf8a5a2e27e49"
+    },
+    {
+      "repo": "Momentum",
+      "message": "README",
+      "date": "2026-11-20T17:09:08.000+05:30",
+      "url": "https://github.com/ansh3108/Momentum/commit/fcdda8bbfe5e6e4c09fee7d6d9c1ffbd5d45bcd7"
+    },
+    {
+      "repo": "Momentum",
       "message": "Merge pull request #10 from ansh3108/master",
       "date": "2026-11-19T17:59:09.000+05:30",
       "url": "https://github.com/ansh3108/Momentum/commit/805ab0abd7a78e0506cdccd6f29505f0be944222"
@@ -78,42 +114,6 @@
       "message": "feat: add atmosphere post-processing effects and mixin integration",
       "date": "2026-11-19T17:57:54.000+05:30",
       "url": "https://github.com/ansh3108/Momentum/commit/28e17428cb704fdcd8320830c82eeadaecbb9ffa"
-    },
-    {
-      "repo": "User-Profiles",
-      "message": "Merge pull request #1 from ansh3108/master",
-      "date": "2026-11-19T12:17:25.000+05:30",
-      "url": "https://github.com/ansh3108/User-Profiles/commit/d0f670b1042302acdfdada70d4bc4f13e0b4cd2f"
-    },
-    {
-      "repo": "User-Profiles",
-      "message": "feat: implement user profile initialization and remove obsolete test",
-      "date": "2026-11-19T12:15:26.000+05:30",
-      "url": "https://github.com/ansh3108/User-Profiles/commit/bb97cfa85783ea39d87b1d22e28e68c036738534"
-    },
-    {
-      "repo": "Momentum",
-      "message": "Merge pull request #9 from ansh3108/master",
-      "date": "2026-11-16T09:43:53.000+05:30",
-      "url": "https://github.com/ansh3108/Momentum/commit/d642e60c88ccd4977b41a844bfa7d8ecb526ad37"
-    },
-    {
-      "repo": "Momentum",
-      "message": "feat: add EntityMixin to spoof item positions with magnetic pull and pop animation",
-      "date": "2026-11-16T09:43:14.000+05:30",
-      "url": "https://github.com/ansh3108/Momentum/commit/492d7f4caf0bc6be2d210afee43d5bef5e1e4441"
-    },
-    {
-      "repo": "Momentum",
-      "message": "Merge pull request #8 from ansh3108/master",
-      "date": "2026-11-14T10:32:09.000+05:30",
-      "url": "https://github.com/ansh3108/Momentum/commit/a6a98665080a2bd4c75641914b4c8cf9a6b3ecaf"
-    },
-    {
-      "repo": "Momentum",
-      "message": "refactor: change the viewmodel tactics to work only when the height is greater than 1 block",
-      "date": "2026-11-14T10:31:14.000+05:30",
-      "url": "https://github.com/ansh3108/Momentum/commit/f0b24bde30e22fb06ab7b310d492aba81c0c96df"
     }
   ],
   "contributions": [
@@ -1964,8 +1964,8 @@
     },
     {
       "date": "2026-11-20",
-      "count": 0,
-      "level": 0
+      "count": 9,
+      "level": 3
     }
   ]
 }
