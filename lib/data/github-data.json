@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T06:40:40.270Z",
+  "updatedAt": "2026-11-25T20:59:10.399Z",
   "profile": {
     "name": "Ansh Kumar",
     "login": "ansh3108",
@@ -12,7 +12,7 @@
     "stars": 25,
     "forks": 4,
     "publicRepos": 247,
-    "totalContributions": 1079
+    "totalContributions": 1084
   },
   "languages": [
     {
@@ -68,6 +68,24 @@
   ],
   "commits": [
     {
+      "repo": "User-Profiles",
+      "message": "Merge pull request #5 from ansh3108/master",
+      "date": "2026-11-25T23:18:05.000+05:30",
+      "url": "https://github.com/ansh3108/User-Profiles/commit/ada4c3cbc3fe761588e73976e89037cbb443e77b"
+    },
+    {
+      "repo": "User-Profiles",
+      "message": "Merge pull request #4 from ansh3108/master",
+      "date": "2026-11-25T23:17:42.000+05:30",
+      "url": "https://github.com/ansh3108/User-Profiles/commit/bb944fb4de5f8e0f0c1fec534aaea0c6b5ed96d5"
+    },
+    {
+      "repo": "User-Profiles",
+      "message": "feat: add test for updating user profile",
+      "date": "2026-11-25T23:17:15.000+05:30",
+      "url": "https://github.com/ansh3108/User-Profiles/commit/6f44dfc80dfa68b31c166c4fd562285f0c1f9570"
+    },
+    {
       "repo": "site",
       "message": "Update README.md",
       "date": "2026-11-25T11:13:38.000+05:30",
@@ -81,6 +99,12 @@
     },
     {
       "repo": "User-Profiles",
+      "message": "feat: implement update profile functionality",
+      "date": "2026-11-23T18:53:29.000+05:30",
+      "url": "https://github.com/ansh3108/User-Profiles/commit/007f347634d6312d169d47a1d0fb10bf8474ad69"
+    },
+    {
+      "repo": "User-Profiles",
       "message": "Merge pull request #3 from ansh3108/master",
       "date": "2026-11-22T19:39:58.000+05:30",
       "url": "https://github.com/ansh3108/User-Profiles/commit/73e8f09c671a3753b154092a00aa0e17686ef1e5"
@@ -90,30 +114,6 @@
       "message": "Merge pull request #2 from ansh3108/master",
       "date": "2026-11-22T19:39:27.000+05:30",
       "url": "https://github.com/ansh3108/User-Profiles/commit/6f0ab549cca31d104b095805d94df78acff5ef2d"
-    },
-    {
-      "repo": "User-Profiles",
-      "message": "feat: add user profile initialization test",
-      "date": "2026-11-22T19:38:41.000+05:30",
-      "url": "https://github.com/ansh3108/User-Profiles/commit/b54f25779df3b9ae906d9056b8c4f704e41c9db7"
-    },
-    {
-      "repo": "User-Profiles",
-      "message": "feat: add test for user profile initialization",
-      "date": "2026-11-22T11:18:09.000+05:30",
-      "url": "https://github.com/ansh3108/User-Profiles/commit/dab29e834a10a4ad27503ec2b3de46b6f1d0e3a2"
-    },
-    {
-      "repo": "Momentum",
-      "message": "Merge pull request #13 from ansh3108/ansh3108-patch-2",
-      "date": "2026-11-20T20:04:02.000+05:30",
-      "url": "https://github.com/ansh3108/Momentum/commit/f7953cd250c53778fa3f89a185fb6d38f4a92508"
-    },
-    {
-      "repo": "Momentum",
-      "message": "Update README.md",
-      "date": "2026-11-20T20:03:36.000+05:30",
-      "url": "https://github.com/ansh3108/Momentum/commit/92b976b8d92d7fcce4825ec6d31baf5cb394c256"
     }
   ],
   "contributions": [
@@ -1944,7 +1944,7 @@
     },
     {
       "date": "2026-11-23",
-      "count": 2,
+      "count": 3,
       "level": 1
     },
     {
@@ -1954,8 +1954,8 @@
     },
     {
       "date": "2026-11-25",
-      "count": 1,
-      "level": 1
+      "count": 5,
+      "level": 2
     }
   ]
 }
