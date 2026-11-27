@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-27T06:21:39.518Z",
+  "updatedAt": "2026-11-27T20:37:17.527Z",
   "profile": {
     "name": "Ansh Kumar",
     "login": "ansh3108",
@@ -12,7 +12,7 @@
     "stars": 25,
     "forks": 4,
     "publicRepos": 247,
-    "totalContributions": 1087
+    "totalContributions": 1093
   },
   "languages": [
     {
@@ -69,6 +69,30 @@
   "commits": [
     {
       "repo": "User-Profiles",
+      "message": "Merge pull request #8 from ansh3108/master",
+      "date": "2026-11-27T22:57:37.000+05:30",
+      "url": "https://github.com/ansh3108/User-Profiles/commit/f5a76c71f37a3b3c9670a8d09710ecd967a23192"
+    },
+    {
+      "repo": "User-Profiles",
+      "message": "feat: implement close profile functionality and corresponding test",
+      "date": "2026-11-27T22:57:05.000+05:30",
+      "url": "https://github.com/ansh3108/User-Profiles/commit/bfe280f15741584efc84b20e11aba1f2742f459c"
+    },
+    {
+      "repo": "User-Profiles",
+      "message": "Merge pull request #7 from ansh3108/master",
+      "date": "2026-11-27T19:49:37.000+05:30",
+      "url": "https://github.com/ansh3108/User-Profiles/commit/4c3e70b8bdbc4ab07731dec0e180710e7beb8f15"
+    },
+    {
+      "repo": "User-Profiles",
+      "message": "feat: implement profile length validation and error handling",
+      "date": "2026-11-27T19:49:11.000+05:30",
+      "url": "https://github.com/ansh3108/User-Profiles/commit/59d50d9f387e9f81037865f10ffda670c2765c64"
+    },
+    {
+      "repo": "User-Profiles",
       "message": "Merge pull request #6 from ansh3108/master",
       "date": "2026-11-26T23:37:19.000+05:30",
       "url": "https://github.com/ansh3108/User-Profiles/commit/b0a65bfdea8cb2b50af13f1f0c8341eabb38c30e"
@@ -90,30 +114,6 @@
       "message": "Merge pull request #4 from ansh3108/master",
       "date": "2026-11-25T23:17:42.000+05:30",
       "url": "https://github.com/ansh3108/User-Profiles/commit/bb944fb4de5f8e0f0c1fec534aaea0c6b5ed96d5"
-    },
-    {
-      "repo": "User-Profiles",
-      "message": "feat: add test for updating user profile",
-      "date": "2026-11-25T23:17:15.000+05:30",
-      "url": "https://github.com/ansh3108/User-Profiles/commit/6f44dfc80dfa68b31c166c4fd562285f0c1f9570"
-    },
-    {
-      "repo": "site",
-      "message": "Update README.md",
-      "date": "2026-11-25T11:13:38.000+05:30",
-      "url": "https://github.com/ansh3108/site/commit/65462fbdf1b53d8eeab5f07d640189eab4b62883"
-    },
-    {
-      "repo": "site",
-      "message": "Update README.md",
-      "date": "2026-11-23T19:53:40.000+05:30",
-      "url": "https://github.com/ansh3108/site/commit/d692f4f73a2fc119bc0f96cdd7b3c9cc92fa7002"
-    },
-    {
-      "repo": "User-Profiles",
-      "message": "feat: implement update profile functionality",
-      "date": "2026-11-23T18:53:29.000+05:30",
-      "url": "https://github.com/ansh3108/User-Profiles/commit/007f347634d6312d169d47a1d0fb10bf8474ad69"
     }
   ],
   "contributions": [
@@ -1964,8 +1964,8 @@
     },
     {
       "date": "2026-11-27",
-      "count": 0,
-      "level": 0
+      "count": 6,
+      "level": 2
     }
   ]
 }
