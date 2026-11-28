@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-27T20:37:17.527Z",
+  "updatedAt": "2026-11-28T05:58:52.054Z",
   "profile": {
     "name": "Ansh Kumar",
     "login": "ansh3108",
@@ -10,59 +10,59 @@
   },
   "stats": {
     "stars": 25,
-    "forks": 4,
+    "forks": 2,
     "publicRepos": 247,
     "totalContributions": 1093
   },
   "languages": [
     {
       "name": "JavaScript",
-      "percentage": 38.5,
-      "count": 85
+      "percentage": 41.1,
+      "count": 76
     },
     {
       "name": "HTML",
-      "percentage": 19,
-      "count": 42
+      "percentage": 16.2,
+      "count": 30
     },
     {
       "name": "CSS",
-      "percentage": 11.8,
-      "count": 26
-    },
-    {
-      "name": "Python",
-      "percentage": 8.6,
-      "count": 19
+      "percentage": 12.4,
+      "count": 23
     },
     {
       "name": "TypeScript",
-      "percentage": 7.2,
-      "count": 16
+      "percentage": 8.1,
+      "count": 15
+    },
+    {
+      "name": "Python",
+      "percentage": 7,
+      "count": 13
     },
     {
       "name": "Rust",
-      "percentage": 5.9,
+      "percentage": 7,
       "count": 13
     },
     {
       "name": "Java",
       "percentage": 3.2,
-      "count": 7
-    },
-    {
-      "name": "PHP",
-      "percentage": 1.4,
-      "count": 3
+      "count": 6
     },
     {
       "name": "GLSL",
-      "percentage": 1.4,
+      "percentage": 1.6,
       "count": 3
     },
     {
-      "name": "C++",
-      "percentage": 0.9,
+      "name": "PHP",
+      "percentage": 1.1,
+      "count": 2
+    },
+    {
+      "name": "Solidity",
+      "percentage": 1.1,
       "count": 2
     }
   ],
@@ -1966,6 +1966,11 @@
       "date": "2026-11-27",
       "count": 6,
       "level": 2
+    },
+    {
+      "date": "2026-11-28",
+      "count": 0,
+      "level": 0
     }
   ]
 }
